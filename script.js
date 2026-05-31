@@ -2775,16 +2775,86 @@ function initUtilityButtons() {
 
       // Temporarily force a white background so canvas renders correctly
       const originalBg = examPaper.style.background;
-      examPaper.style.background = '#ffffff';
+      // 1. Force MathJax to finish any pending typesetting
+      if (window.MathJax?.typesetPromise) {
+        await window.MathJax.typesetPromise([examPaper]).catch(() => {});
+      }
+      // Small buffer for CHTML layout to settle
+      await new Promise(r => setTimeout(r, 400));
 
-      const canvas = await html2canvas(examPaper, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        backgroundColor: '#ffffff',
-        windowWidth: examPaper.scrollWidth,
-        windowHeight: examPaper.scrollHeight
-      });
+      // 2. Resolve every CSS custom property on every element
+      //    so html2canvas sees literal color values
+      function resolveCSSVars(root) {
+        const computed = getComputedStyle(root);
+        const styleProps = [
+          'color','background','backgroundColor','borderColor',
+          'borderTopColor','borderBottomColor','borderLeftColor','borderRightColor'
+        ];
+        styleProps.forEach(prop => {
+          const val = computed.getPropertyValue(prop);
+          if (val && val.includes('var(')) {
+            root.style[prop] = val;
+          }
+        });
+        Array.from(root.children).forEach(child => resolveCSSVars(child));
+      }
+
+// 3. Work on a deep clone so we never mutate the live DOM
+const clone = examPaper.cloneNode(true);
+clone.style.cssText = `
+  position: fixed;
+  top: 0; left: 0;
+  width: ${examPaper.scrollWidth}px;
+  background: #ffffff;
+  color: #0f172a;
+  font-family: Georgia, 'Times New Roman', serif;
+  padding: 32px;
+  box-sizing: border-box;
+  z-index: -9999;
+  pointer-events: none;
+`;
+
+// 4. Inline all CSS variable references in the clone
+document.body.appendChild(clone);
+       // Unhide all [hidden] descendants inside the clone so they render in the PDF
+clone.querySelectorAll('[hidden]').forEach(el => {
+  el.removeAttribute('hidden');
+  el.style.display = '';
+});
+// Also strip display:none inline styles inside the clone
+clone.querySelectorAll('*').forEach(el => {
+  if (el.style.display === 'none') el.style.display = '';
+});
+resolveCSSVars(clone);
+
+// 5. Replace MathJax SVG/CHTML with its plain-text alt text as fallback,
+//    then let MathJax re-render inside the clone
+if (window.MathJax?.typesetPromise) {
+  await window.MathJax.typesetPromise([clone]).catch(() => {});
+}
+await new Promise(r => setTimeout(r, 600));
+
+const canvas = await html2canvas(clone, {
+  scale: 2,
+  useCORS: true,
+  allowTaint: true,
+  logging: false,
+  backgroundColor: '#ffffff',
+  width: clone.scrollWidth,
+  height: clone.scrollHeight,
+  windowWidth: clone.scrollWidth,
+  windowHeight: clone.scrollHeight,
+  onclone: (clonedDoc, clonedEl) => {
+    // Force white bg + dark text on every element in the captured clone
+    clonedEl.querySelectorAll('*').forEach(el => {
+      const cs = getComputedStyle(el);
+      if (cs.color.includes('var(') || cs.color === '') el.style.color = '#0f172a';
+      if (cs.backgroundColor.includes('var(')) el.style.backgroundColor = 'transparent';
+    });
+  }
+});
+
+document.body.removeChild(clone);
 
       examPaper.style.background = originalBg;
 
@@ -2799,23 +2869,29 @@ function initUtilityButtons() {
 
       while (remainingH > 0) {
         const sliceH = Math.min(remainingH, usableH);
-        const sliceCanvas = document.createElement('canvas');
-        sliceCanvas.width = canvas.width;
-        sliceCanvas.height = (sliceH / imgH) * canvas.height;
+        // canvas is rendered at scale:2, so canvas pixels = 2× CSS pixels
+      // imgH is in jsPDF mm-units; convert slice height back to canvas pixels correctly
+      const canvasScale = canvas.height / imgH;   // px per mm-unit
+      const sliceCanvas = document.createElement('canvas');
+      sliceCanvas.width  = canvas.width;
+      sliceCanvas.height = Math.round(sliceH * canvasScale);
 
-        const ctx = sliceCanvas.getContext('2d');
-        ctx.drawImage(
-          canvas,
-          0, sourceY,
-          canvas.width, sliceCanvas.height,
-          0, 0,
-          canvas.width, sliceCanvas.height
-        );
+      const ctx = sliceCanvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height);
+      ctx.drawImage(
+        canvas,
+        0, Math.round(sourceY * canvasScale),   // src y in real canvas pixels
+        canvas.width, sliceCanvas.height,        // src width/height
+        0, 0,                                    // dst x, y
+        sliceCanvas.width, sliceCanvas.height    // dst width/height
+      );
+
+      sourceY += sliceH;   // advance in mm-units to stay consistent
 
         const sliceData = sliceCanvas.toDataURL('image/jpeg', 0.92);
         pdf.addImage(sliceData, 'JPEG', margin, yOffset, imgW, sliceH);
 
-        sourceY += sliceCanvas.height;
         remainingH -= sliceH;
 
         if (remainingH > 0) {
