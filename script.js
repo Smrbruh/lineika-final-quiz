@@ -778,22 +778,22 @@ const Generators = (() => {
   }
 
   function genVectorEquations(difficulty) {
-     const A = transpose(vecs);  // m×n coefficient matrix (rows = equations)
-     const augMatrix = transpose(vecs).map((row, i) => [...row, target[i]]);
+     const d = difficulty || 'intermediate';
+     const n = d === 'easy' ? 2 : 3;
+     const range = d === 'hard' ? 6 : 4;
+     const numVecs = d === 'easy' ? 2 : d === 'hard' ? 4 : 3;
+
+     const vecs = Array.from({ length: numVecs }, () => randVector(n, range, false));
+     const coeffs = Array.from({ length: numVecs }, () => randInt(-3, 3));
+     const target = Array.from({ length: n }, (_, i) => vecs.reduce((s, v, j) => s + coeffs[j]*v[i], 0));
+
+     const A = transpose(vecs);
+     const augMatrix = A.map((row, i) => [...row, target[i]]);
      const augRREF = rowReduce(augMatrix);
-    const d = difficulty || 'intermediate';
-    const n = d === 'easy' ? 2 : 3;
-    const range = d === 'hard' ? 6 : 4;
-    const numVecs = d === 'easy' ? 2 : d === 'hard' ? 4 : 3;
 
-    const vecs = Array.from({ length: numVecs }, () => randVector(n, range, false));
-    // Build a target that IS in the span
-    const coeffs = Array.from({ length: numVecs }, () => randInt(-3, 3));
-    const target = Array.from({ length: n }, (_, i) => vecs.reduce((s, v, j) => s + coeffs[j]*v[i], 0));
-
-    const vecsLatex = vecs.map(v => `\\mathbf{v}_{${vecs.indexOf(v)+1}} = ${vecToLatex(v)}`).join(', \\quad ');
-    const bLatex = vecToLatex(target);
-    const coeffStr = coeffs.map((c,i) => `${c >= 0 && i > 0 ? '+' : ''}${c}\\mathbf{v}_{${i+1}}`).join(' ');
+       const vecsLatex = vecs.map(v => `\\mathbf{v}_{${vecs.indexOf(v)+1}} = ${vecToLatex(v)}`).join(', \\quad ');
+       const bLatex = vecToLatex(target);
+       const coeffStr = coeffs.map((c,i) => `${c >= 0 && i > 0 ? '+' : ''}${c}\\mathbf{v}_{${i+1}}`).join(' ');
 
     return makeProblem({
       topic: 'Vector Equations', week: 1, difficulty,
@@ -1729,11 +1729,11 @@ const Generators = (() => {
       solution: {
         answer: `Orthogonal basis: $\\{${orthVecs.map((v,i)=>`\\mathbf{u}_{${i+1}}`).join(', ')}\\}$.`,
         steps: [
-          { title: 'u₁ = v₁', math: `\\[\\mathbf{u}_1 = ${vecToLatex(vecs[0])}\\]` },
-          { title: 'u₃ = v₃ − proj_{u₁}(v₃) − proj_{u₂}(v₃)', math: `\\[\\mathbf{u}_3 = \\mathbf{v}_3 - \\frac{\\mathbf{v}_3 \\cdot \\mathbf{u}_1}{\\|\\mathbf{u}_1\\|^2}\\mathbf{u}_1 - \\frac{\\mathbf{v}_3 \\cdot \\mathbf{u}_2}{\\|\\mathbf{u}_2\\|^2}\\mathbf{u}_2\\]` },
-          ...(n === 3 ? [{ title: 'u₃ = v₃ − proj_{u₁}(v₃) − proj_{u₂}(v₃)', math: `\\[\\mathbf{u}_3 = \\mathbf{v}_3 - \\frac{\\mathbf{v}_3 \\cdot \\mathbf{u}_1}{\\|\\mathbf{u}_1\\|^2}\\mathbf{u}_1 - \\frac{\\mathbf{v}_3 \\cdot \\mathbf{u}_2}{\\|\\mathbf{u}_2\\|^2}\\mathbf{u}_2\\]` }] : []),
-          { title: 'Normalize', math: `\\[\\mathbf{e}_k = \\frac{\\mathbf{u}_k}{\\|\\mathbf{u}_k\\|}\\]` }
-        ]
+           { title: 'u₁ = v₁', math: `\\[\\mathbf{u}_1 = ${vecToLatex(vecs[0])}\\]` },
+           { title: 'u₂ = v₂ − proj_{u₁}(v₂)', math: `\\[\\mathbf{u}_2 = \\mathbf{v}_2 - \\frac{\\mathbf{v}_2 \\cdot \\mathbf{u}_1}{\\|\\mathbf{u}_1\\|^2}\\mathbf{u}_1\\]` },
+           ...(n === 3 ? [{ title: 'u₃ = v₃ − proj_{u₁}(v₃) − proj_{u₂}(v₃)', math: `\\[\\mathbf{u}_3 = \\mathbf{v}_3 - \\frac{\\mathbf{v}_3 \\cdot \\mathbf{u}_1}{\\|\\mathbf{u}_1\\|^2}\\mathbf{u}_1 - \\frac{\\mathbf{v}_3 \\cdot \\mathbf{u}_2}{\\|\\mathbf{u}_2\\|^2}\\mathbf{u}_2\\]` }] : []),
+           { title: 'Normalize', math: `\\[\\mathbf{e}_k = \\frac{\\mathbf{u}_k}{\\|\\mathbf{u}_k\\|}\\]` }
+         ]
       },
       theorems: ['Gram–Schmidt theorem (§6.4)', 'Projection formula: proj_u(v) = (v·u)/(u·u) u', 'Result: orthogonal (or orthonormal) basis for same span'],
       mistakes: ['Computing projections onto earlier original vectors v instead of orthogonalized u vectors.', 'Normalizing too early (normalize only at the end).'],
@@ -2810,7 +2810,7 @@ const canvas = await html2canvas(examPaper, {
   windowWidth: window.innerWidth,
   windowHeight: examPaper.scrollHeight,
   scrollX: 0,
-  scrollY: -window.scrollY
+  scrollY: -window.scrollY,
   onclone: (doc) => {
     // Ensure the cloned document also has light theme applied
     const cloneBody = doc.getElementById('page-body');
@@ -2946,9 +2946,9 @@ function initSpecialTypeButtons() {
    ============================================================ */
 
 function initMainGenerator() {
-   const examMode = document.querySelector('input[name="exam-mode"]:checked')?.value || 'practice';
-StorageManager.set('examMode', examMode);
   const generateBtn = document.getElementById('generate-btn');
+   const examMode = document.querySelector('input[name="exam-mode"]:checked')?.value || 'practice';
+    StorageManager.set('examMode', examMode);
   if (!generateBtn) return;
 
   generateBtn.addEventListener('click', () => {
