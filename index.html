@@ -1,0 +1,2706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Linear Algebra Problem Generator — Unlimited practice problems for Astana IT University Linear Algebra course." />
+  <meta name="theme-color" content="#0a0a0f" />
+
+  <title>LINEAR ALGEBRA — Problem Generator</title>
+
+  <!-- MathJax v3 (CDN, deferred) — uncomment when deploying -->
+  <!--
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  -->
+
+  <!-- External fonts — uncomment when deploying -->
+  <!--
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=YOUR_FONT_CHOICE&display=swap" rel="stylesheet" />
+  -->
+
+  <!-- Main stylesheet (to be created separately) -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body id="page-body" class="theme-dark" data-page="generator">
+
+  <!-- ============================================================
+       SKIP NAVIGATION (Accessibility)
+  ============================================================ -->
+  <a href="#main-content" class="skip-nav" tabindex="0">Skip to main content</a>
+
+  <!-- ============================================================
+       OVERLAY — Mobile sidebar backdrop
+  ============================================================ -->
+  <div id="sidebar-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       SITE WRAPPER
+  ============================================================ -->
+  <div id="site-wrapper" class="site-wrapper">
+
+    <!-- ============================================================
+         SIDEBAR — Navigation
+    ============================================================ -->
+    <aside
+      id="sidebar"
+      class="sidebar"
+      role="complementary"
+      aria-label="Course navigation"
+    >
+
+      <!-- Sidebar Header -->
+      <div class="sidebar__header">
+        <div class="sidebar__logo" aria-label="Linear Algebra Generator">
+          <span class="sidebar__logo-icon" aria-hidden="true">∑</span>
+          <span class="sidebar__logo-text">LA<span class="sidebar__logo-accent">GEN</span></span>
+        </div>
+        <button
+          id="sidebar-close-btn"
+          class="sidebar__close-btn"
+          aria-label="Close navigation"
+          type="button"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
+      <!-- Sidebar Nav -->
+      <nav id="main-nav" class="sidebar__nav" aria-label="Main navigation">
+
+        <!-- Quick Links -->
+        <section class="sidebar__nav-group" aria-labelledby="nav-quick-label">
+          <h2 id="nav-quick-label" class="sidebar__nav-group-title">Quick Access</h2>
+          <ul class="sidebar__nav-list" role="list">
+            <li class="sidebar__nav-item">
+              <a href="#dashboard" class="sidebar__nav-link sidebar__nav-link--active" aria-current="page">
+                <span class="sidebar__nav-icon" aria-hidden="true">⊞</span>
+                Dashboard
+              </a>
+            </li>
+            <li class="sidebar__nav-item">
+              <a href="#generator-panel" class="sidebar__nav-link">
+                <span class="sidebar__nav-icon" aria-hidden="true">⚙</span>
+                Generator
+              </a>
+            </li>
+            <li class="sidebar__nav-item">
+              <a href="#exam-mode" class="sidebar__nav-link">
+                <span class="sidebar__nav-icon" aria-hidden="true">📝</span>
+                Exam Mode
+              </a>
+            </li>
+            <li class="sidebar__nav-item">
+              <a href="#topic-modules" class="sidebar__nav-link">
+                <span class="sidebar__nav-icon" aria-hidden="true">📚</span>
+                Topic Modules
+              </a>
+            </li>
+            <li class="sidebar__nav-item">
+              <a href="#special-problems" class="sidebar__nav-link">
+                <span class="sidebar__nav-icon" aria-hidden="true">★</span>
+                Special Types
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Week Navigation -->
+        <section class="sidebar__nav-group" aria-labelledby="nav-weeks-label">
+          <h2 id="nav-weeks-label" class="sidebar__nav-group-title">Weekly Modules</h2>
+          <ul class="sidebar__nav-list sidebar__nav-list--weeks" role="list">
+
+            <li class="sidebar__nav-item sidebar__nav-item--week">
+              <a href="#week-1" class="sidebar__nav-link sidebar__week-link">
+                <span class="sidebar__week-badge" aria-hidden="true">W1</span>
+                <span class="sidebar__week-content">
+                  <span class="sidebar__week-title">Linear Systems & Vectors</span>
+                  <span class="sidebar__week-topics">SLE · Row Reduction · Echelon Forms · Vectors · Matrix Eq.</span>
+                </span>
+              </a>
+            </li>
+
+            <li class="sidebar__nav-item sidebar__nav-item--week">
+              <a href="#week-2" class="sidebar__nav-link sidebar__week-link">
+                <span class="sidebar__week-badge" aria-hidden="true">W2</span>
+                <span class="sidebar__week-content">
+                  <span class="sidebar__week-title">Solution Sets & Independence</span>
+                  <span class="sidebar__week-topics">Solution Sets · Applications · Linear Independence</span>
+                </span>
+              </a>
+            </li>
+
+            <li class="sidebar__nav-item sidebar__nav-item--week">
+              <a href="#week-3" class="sidebar__nav-link sidebar__week-link">
+                <span class="sidebar__week-badge" aria-hidden="true">W3</span>
+                <span class="sidebar__week-content">
+                  <span class="sidebar__week-title">Transformations & Operations</span>
+                  <span class="sidebar__week-topics">Linear Transformations · Matrix Operations</span>
+                </span>
+              </a>
+            </li>
+
+            <li class="sidebar__nav-item sidebar__nav-item--week">
+              <a href="#week-4" class="sidebar__nav-link sidebar__week-link">
+                <span class="sidebar__week-badge" aria-hidden="true">W4</span>
+                <span class="sidebar__week-content">
+                  <span class="sidebar__week-title">Inverse & Factorization</span>
+                  <span class="sidebar__week-topics">Inverse Matrices · Invertibility · LU Factorization</span>
+                </span>
+              </a>
+            </li>
+
+            <li class="sidebar__nav-item sidebar__nav-item--week">
+              <a href="#week-5" class="sidebar__nav-link sidebar__week-link">
+                <span class="sidebar__week-badge" aria-hidden="true">W5</span>
+                <span class="sidebar__week-content">
+                  <span class="sidebar__week-title">Determinants & Cramer</span>
+                  <span class="sidebar__week-topics">Determinants · Cramer's Rule · Volumes</span>
+                </span>
+              </a>
+            </li>
+
+            <li class="sidebar__nav-item sidebar__nav-item--week">
+              <a href="#week-6" class="sidebar__nav-link sidebar__week-link">
+                <span class="sidebar__week-badge" aria-hidden="true">W6</span>
+                <span class="sidebar__week-content">
+                  <span class="sidebar__week-title">Vector Spaces</span>
+                  <span class="sidebar__week-topics">Vector Spaces · Subspaces · Null Space · Col Space</span>
+                </span>
+              </a>
+            </li>
+
+            <li class="sidebar__nav-item sidebar__nav-item--week">
+              <a href="#week-7" class="sidebar__nav-link sidebar__week-link">
+                <span class="sidebar__week-badge" aria-hidden="true">W7</span>
+                <span class="sidebar__week-content">
+                  <span class="sidebar__week-title">Bases & Rank</span>
+                  <span class="sidebar__week-topics">Bases · Dimension · Coordinate Systems · Rank</span>
+                </span>
+              </a>
+            </li>
+
+            <li class="sidebar__nav-item sidebar__nav-item--week">
+              <a href="#week-8" class="sidebar__nav-link sidebar__week-link">
+                <span class="sidebar__week-badge" aria-hidden="true">W8</span>
+                <span class="sidebar__week-content">
+                  <span class="sidebar__week-title">Eigenvalues & Eigenvectors</span>
+                  <span class="sidebar__week-topics">Change of Basis · Eigenvalues · Eigenvectors · Char. Eq.</span>
+                </span>
+              </a>
+            </li>
+
+            <li class="sidebar__nav-item sidebar__nav-item--week">
+              <a href="#week-9" class="sidebar__nav-link sidebar__week-link">
+                <span class="sidebar__week-badge" aria-hidden="true">W9</span>
+                <span class="sidebar__week-content">
+                  <span class="sidebar__week-title">Diagonalization & Complex</span>
+                  <span class="sidebar__week-topics">Diagonalization · Linear Transf. · Complex Eigenvalues</span>
+                </span>
+              </a>
+            </li>
+
+            <li class="sidebar__nav-item sidebar__nav-item--week">
+              <a href="#week-10" class="sidebar__nav-link sidebar__week-link">
+                <span class="sidebar__week-badge sidebar__week-badge--final" aria-hidden="true">W10</span>
+                <span class="sidebar__week-content">
+                  <span class="sidebar__week-title">Final Review</span>
+                  <span class="sidebar__week-topics">Comprehensive Exam Preparation</span>
+                </span>
+              </a>
+            </li>
+
+          </ul>
+        </section>
+
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar__footer">
+        <p class="sidebar__footer-text">Astana IT University · Linear Algebra · 2026</p>
+        <p class="sidebar__footer-sub">Lay et al., 5th ed. · Instructor: Z. Ramazanova</p>
+      </div>
+
+    </aside>
+    <!-- /sidebar -->
+
+    <!-- ============================================================
+         MAIN CONTENT AREA
+    ============================================================ -->
+    <div id="content-area" class="content-area">
+
+      <!-- ============================================================
+           SITE HEADER
+      ============================================================ -->
+      <header id="site-header" class="site-header" role="banner">
+
+        <div class="site-header__left">
+          <!-- Mobile menu toggle -->
+          <button
+            id="sidebar-toggle-btn"
+            class="site-header__menu-btn"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="sidebar"
+            type="button"
+          >
+            <span class="site-header__hamburger" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </span>
+          </button>
+
+          <div class="site-header__title-block">
+            <h1 class="site-header__title">
+              <span class="site-header__title-main">Linear Algebra</span>
+              <span class="site-header__title-sub">Problem Generator</span>
+            </h1>
+            <p class="site-header__subtitle">Unlimited AI-generated practice · Astana IT University · Spring 2026</p>
+          </div>
+        </div>
+
+        <div class="site-header__right">
+
+          <!-- Session stats mini bar -->
+          <div class="site-header__session-stats" aria-label="Session statistics">
+            <div class="session-stat">
+              <span class="session-stat__value" id="header-stat-generated">0</span>
+              <span class="session-stat__label">Generated</span>
+            </div>
+            <div class="session-stat">
+              <span class="session-stat__value" id="header-stat-solved">0</span>
+              <span class="session-stat__label">Solved</span>
+            </div>
+            <div class="session-stat session-stat--streak">
+              <span class="session-stat__value" id="header-stat-streak">0</span>
+              <span class="session-stat__label">Streak</span>
+            </div>
+          </div>
+
+          <!-- Header Actions -->
+          <div class="site-header__actions">
+            <button id="theme-toggle-btn" class="site-header__action-btn" aria-label="Toggle light/dark theme" type="button">
+              <span class="theme-icon theme-icon--dark" aria-hidden="true">☾</span>
+              <span class="theme-icon theme-icon--light" aria-hidden="true">☀</span>
+            </button>
+            <button id="reset-session-btn" class="site-header__action-btn" aria-label="Reset session" type="button">
+              <span aria-hidden="true">↺</span>
+            </button>
+          </div>
+
+        </div>
+      </header>
+      <!-- /site-header -->
+
+      <!-- ============================================================
+           MAIN
+      ============================================================ -->
+      <main id="main-content" class="main-content" tabindex="-1">
+
+        <!-- ============================================================
+             DASHBOARD
+        ============================================================ -->
+        <section id="dashboard" class="dashboard section" aria-labelledby="dashboard-title">
+          <header class="section__header">
+            <h2 id="dashboard-title" class="section__title">Dashboard</h2>
+            <p class="section__subtitle">Session overview and quick access controls</p>
+          </header>
+
+          <div class="dashboard__grid">
+
+            <!-- Card: Generated Problems -->
+            <article class="dashboard-card dashboard-card--generated" aria-label="Problems generated this session">
+              <div class="dashboard-card__icon" aria-hidden="true">⚡</div>
+              <div class="dashboard-card__body">
+                <div class="dashboard-card__value" id="stat-generated">0</div>
+                <div class="dashboard-card__label">Problems Generated</div>
+              </div>
+              <div class="dashboard-card__trend" aria-label="Trend indicator" id="trend-generated"></div>
+            </article>
+
+            <!-- Card: Solved Problems -->
+            <article class="dashboard-card dashboard-card--solved" aria-label="Problems solved this session">
+              <div class="dashboard-card__icon" aria-hidden="true">✓</div>
+              <div class="dashboard-card__body">
+                <div class="dashboard-card__value" id="stat-solved">0</div>
+                <div class="dashboard-card__label">Problems Solved</div>
+              </div>
+              <div class="dashboard-card__trend" id="trend-solved"></div>
+            </article>
+
+            <!-- Card: Solutions Viewed -->
+            <article class="dashboard-card dashboard-card--viewed" aria-label="Solutions viewed this session">
+              <div class="dashboard-card__icon" aria-hidden="true">👁</div>
+              <div class="dashboard-card__body">
+                <div class="dashboard-card__value" id="stat-viewed">0</div>
+                <div class="dashboard-card__label">Solutions Viewed</div>
+              </div>
+              <div class="dashboard-card__trend" id="trend-viewed"></div>
+            </article>
+
+            <!-- Card: Current Topic -->
+            <article class="dashboard-card dashboard-card--topic" aria-label="Currently active topic">
+              <div class="dashboard-card__icon" aria-hidden="true">📌</div>
+              <div class="dashboard-card__body">
+                <div class="dashboard-card__value dashboard-card__value--text" id="stat-topic">—</div>
+                <div class="dashboard-card__label">Current Topic</div>
+              </div>
+              <div class="dashboard-card__meta" id="stat-topic-week"></div>
+            </article>
+
+            <!-- Card: Difficulty Level -->
+            <article class="dashboard-card dashboard-card--difficulty" aria-label="Current difficulty level">
+              <div class="dashboard-card__icon" aria-hidden="true">◈</div>
+              <div class="dashboard-card__body">
+                <div class="dashboard-card__value dashboard-card__value--text" id="stat-difficulty">Intermediate</div>
+                <div class="dashboard-card__label">Difficulty Level</div>
+              </div>
+              <div class="dashboard-card__difficulty-bar" aria-hidden="true">
+                <span class="difficulty-bar__fill" id="difficulty-bar-fill"></span>
+              </div>
+            </article>
+
+            <!-- Card: Session Accuracy -->
+            <article class="dashboard-card dashboard-card--accuracy" aria-label="Session accuracy percentage">
+              <div class="dashboard-card__icon" aria-hidden="true">◎</div>
+              <div class="dashboard-card__body">
+                <div class="dashboard-card__value" id="stat-accuracy">—</div>
+                <div class="dashboard-card__label">Accuracy</div>
+              </div>
+              <div class="dashboard-card__progress-ring" aria-hidden="true">
+                <svg class="progress-ring" viewBox="0 0 36 36" role="presentation">
+                  <circle class="progress-ring__track" cx="18" cy="18" r="15" />
+                  <circle class="progress-ring__fill" id="accuracy-ring" cx="18" cy="18" r="15" />
+                </svg>
+              </div>
+            </article>
+
+          </div>
+          <!-- /dashboard__grid -->
+
+        </section>
+        <!-- /dashboard -->
+
+        <!-- ============================================================
+             GENERATOR CONTROL PANEL
+        ============================================================ -->
+        <section id="generator-panel" class="generator-panel section" aria-labelledby="generator-panel-title">
+          <header class="section__header">
+            <h2 id="generator-panel-title" class="section__title">Problem Generator</h2>
+            <p class="section__subtitle">Configure and generate your next Linear Algebra problem</p>
+          </header>
+
+          <div class="generator-panel__layout">
+
+            <!-- Left column: controls -->
+            <div class="generator-panel__controls">
+
+              <!-- Topic Selector -->
+              <fieldset class="control-group" id="topic-selector-group">
+                <legend class="control-group__legend">Select Topic</legend>
+
+                <div class="topic-selector" role="group" aria-labelledby="topic-selector-label">
+                  <span id="topic-selector-label" class="visually-hidden">Available topics</span>
+
+                  <!-- Week 1 topics -->
+                  <div class="topic-selector__week-group" data-week="1">
+                    <span class="topic-selector__week-label">Week 1</span>
+                    <div class="topic-selector__chips">
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="systems-of-linear-equations" class="topic-chip__input" />
+                        <span class="topic-chip__label">Systems of Linear Equations</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="row-reduction" class="topic-chip__input" />
+                        <span class="topic-chip__label">Row Reduction</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="echelon-forms" class="topic-chip__input" />
+                        <span class="topic-chip__label">Echelon Forms</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="vector-equations" class="topic-chip__input" />
+                        <span class="topic-chip__label">Vector Equations</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="matrix-equation" class="topic-chip__input" />
+                        <span class="topic-chip__label">Matrix Equation (Ax=b)</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Week 2 topics -->
+                  <div class="topic-selector__week-group" data-week="2">
+                    <span class="topic-selector__week-label">Week 2</span>
+                    <div class="topic-selector__chips">
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="solution-sets" class="topic-chip__input" />
+                        <span class="topic-chip__label">Solution Sets</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="applications-linear-systems" class="topic-chip__input" />
+                        <span class="topic-chip__label">Applications</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="linear-independence" class="topic-chip__input" />
+                        <span class="topic-chip__label">Linear Independence</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Week 3 topics -->
+                  <div class="topic-selector__week-group" data-week="3">
+                    <span class="topic-selector__week-label">Week 3</span>
+                    <div class="topic-selector__chips">
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="linear-transformations" class="topic-chip__input" />
+                        <span class="topic-chip__label">Linear Transformations</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="matrix-operations" class="topic-chip__input" />
+                        <span class="topic-chip__label">Matrix Operations</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Week 4 topics -->
+                  <div class="topic-selector__week-group" data-week="4">
+                    <span class="topic-selector__week-label">Week 4</span>
+                    <div class="topic-selector__chips">
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="inverse-matrices" class="topic-chip__input" />
+                        <span class="topic-chip__label">Inverse Matrices</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="invertibility" class="topic-chip__input" />
+                        <span class="topic-chip__label">Invertibility</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="lu-factorization" class="topic-chip__input" />
+                        <span class="topic-chip__label">LU Factorization</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Week 5 topics -->
+                  <div class="topic-selector__week-group" data-week="5">
+                    <span class="topic-selector__week-label">Week 5</span>
+                    <div class="topic-selector__chips">
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="determinants" class="topic-chip__input" />
+                        <span class="topic-chip__label">Determinants</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="cramers-rule" class="topic-chip__input" />
+                        <span class="topic-chip__label">Cramer's Rule</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="volumes-linear-transformations" class="topic-chip__input" />
+                        <span class="topic-chip__label">Volumes &amp; Transformations</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Week 6 topics -->
+                  <div class="topic-selector__week-group" data-week="6">
+                    <span class="topic-selector__week-label">Week 6</span>
+                    <div class="topic-selector__chips">
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="vector-spaces" class="topic-chip__input" />
+                        <span class="topic-chip__label">Vector Spaces</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="subspaces" class="topic-chip__input" />
+                        <span class="topic-chip__label">Subspaces</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="null-space" class="topic-chip__input" />
+                        <span class="topic-chip__label">Null Space</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="column-space" class="topic-chip__input" />
+                        <span class="topic-chip__label">Column Space</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Week 7 topics -->
+                  <div class="topic-selector__week-group" data-week="7">
+                    <span class="topic-selector__week-label">Week 7</span>
+                    <div class="topic-selector__chips">
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="bases" class="topic-chip__input" />
+                        <span class="topic-chip__label">Bases</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="dimension" class="topic-chip__input" />
+                        <span class="topic-chip__label">Dimension</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="coordinate-systems" class="topic-chip__input" />
+                        <span class="topic-chip__label">Coordinate Systems</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="rank" class="topic-chip__input" />
+                        <span class="topic-chip__label">Rank</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Week 8 topics -->
+                  <div class="topic-selector__week-group" data-week="8">
+                    <span class="topic-selector__week-label">Week 8</span>
+                    <div class="topic-selector__chips">
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="change-of-basis" class="topic-chip__input" />
+                        <span class="topic-chip__label">Change of Basis</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="eigenvalues" class="topic-chip__input" />
+                        <span class="topic-chip__label">Eigenvalues</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="eigenvectors" class="topic-chip__input" />
+                        <span class="topic-chip__label">Eigenvectors</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="characteristic-equation" class="topic-chip__input" />
+                        <span class="topic-chip__label">Characteristic Equation</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Week 9 topics -->
+                  <div class="topic-selector__week-group" data-week="9">
+                    <span class="topic-selector__week-label">Week 9</span>
+                    <div class="topic-selector__chips">
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="diagonalization" class="topic-chip__input" />
+                        <span class="topic-chip__label">Diagonalization</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="eigenvectors-linear-transformations" class="topic-chip__input" />
+                        <span class="topic-chip__label">Eigenvectors &amp; Linear Transf.</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="complex-eigenvalues" class="topic-chip__input" />
+                        <span class="topic-chip__label">Complex Eigenvalues</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="gram-schmidt" class="topic-chip__input" />
+                        <span class="topic-chip__label">Gram–Schmidt Orthogonalization</span>
+                      </label>
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="orthogonal-complement" class="topic-chip__input" />
+                        <span class="topic-chip__label">Orthogonal Complement</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Week 10 topics -->
+                  <div class="topic-selector__week-group" data-week="10">
+                    <span class="topic-selector__week-label">Week 10</span>
+                    <div class="topic-selector__chips">
+                      <label class="topic-chip">
+                        <input type="radio" name="topic" value="final-review-mixed" class="topic-chip__input" />
+                        <span class="topic-chip__label">Comprehensive Mixed Review</span>
+                      </label>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- /topic-selector -->
+
+              </fieldset>
+              <!-- /topic-selector-group -->
+
+              <!-- Difficulty Selector -->
+              <fieldset class="control-group" id="difficulty-selector-group">
+                <legend class="control-group__legend">Difficulty Level</legend>
+                <div class="difficulty-selector" role="radiogroup" aria-labelledby="difficulty-selector-label">
+                  <span id="difficulty-selector-label" class="visually-hidden">Select difficulty</span>
+
+                  <label class="difficulty-option difficulty-option--easy">
+                    <input type="radio" name="difficulty" value="easy" class="difficulty-option__input" />
+                    <span class="difficulty-option__card">
+                      <span class="difficulty-option__icon" aria-hidden="true">▲</span>
+                      <span class="difficulty-option__name">Basic</span>
+                      <span class="difficulty-option__desc">Straightforward computation</span>
+                    </span>
+                  </label>
+
+                  <label class="difficulty-option difficulty-option--intermediate">
+                    <input type="radio" name="difficulty" value="intermediate" class="difficulty-option__input" checked />
+                    <span class="difficulty-option__card">
+                      <span class="difficulty-option__icon" aria-hidden="true">▲▲</span>
+                      <span class="difficulty-option__name">Intermediate</span>
+                      <span class="difficulty-option__desc">Exam-style problems</span>
+                    </span>
+                  </label>
+
+                  <label class="difficulty-option difficulty-option--hard">
+                    <input type="radio" name="difficulty" value="hard" class="difficulty-option__input" />
+                    <span class="difficulty-option__card">
+                      <span class="difficulty-option__icon" aria-hidden="true">▲▲▲</span>
+                      <span class="difficulty-option__name">Advanced</span>
+                      <span class="difficulty-option__desc">Proof-level challenges</span>
+                    </span>
+                  </label>
+
+                </div>
+              </fieldset>
+              <!-- /difficulty-selector-group -->
+
+              <!-- Matrix/System Size Options -->
+              <fieldset class="control-group" id="size-options-group">
+                <legend class="control-group__legend">Problem Size</legend>
+                <div class="size-options">
+
+                  <label class="size-option" for="matrix-size-select">Matrix / System Dimension</label>
+                  <select id="matrix-size-select" name="matrix-size" class="size-option__select" aria-label="Select matrix or system size">
+                    <option value="2x2">2 × 2</option>
+                    <option value="3x3" selected>3 × 3</option>
+                    <option value="4x4">4 × 4</option>
+                    <option value="3x4">3 equations, 4 unknowns</option>
+                    <option value="2x3">2 equations, 3 unknowns</option>
+                    <option value="random">Random</option>
+                  </select>
+
+                  <label class="size-option" for="num-questions-select">Number of Parts</label>
+                  <select id="num-questions-select" name="num-questions" class="size-option__select" aria-label="Number of sub-parts">
+                    <option value="1">1 part</option>
+                    <option value="2">2 parts (a, b)</option>
+                    <option value="3" selected>3 parts (a, b, c)</option>
+                    <option value="4">4 parts (a, b, c, d)</option>
+                  </select>
+
+                </div>
+              </fieldset>
+              <!-- /size-options-group -->
+
+              <!-- Exam Mode Selector -->
+              <fieldset class="control-group" id="exam-mode-selector-group">
+                <legend class="control-group__legend">Exam Mode</legend>
+                <div class="exam-mode-selector">
+
+                  <label class="exam-mode-option">
+                    <input type="radio" name="exam-mode" value="practice" class="exam-mode-option__input" checked />
+                    <span class="exam-mode-option__label">Practice Mode</span>
+                    <span class="exam-mode-option__desc">See hints and solutions freely</span>
+                  </label>
+
+                  <label class="exam-mode-option">
+                    <input type="radio" name="exam-mode" value="timed" class="exam-mode-option__input" />
+                    <span class="exam-mode-option__label">Timed Mode</span>
+                    <span class="exam-mode-option__desc">Simulate exam conditions</span>
+                  </label>
+
+                  <label class="exam-mode-option">
+                    <input type="radio" name="exam-mode" value="blind" class="exam-mode-option__input" />
+                    <span class="exam-mode-option__label">Blind Mode</span>
+                    <span class="exam-mode-option__desc">No hints, solutions locked</span>
+                  </label>
+
+                </div>
+              </fieldset>
+              <!-- /exam-mode-selector-group -->
+
+              <!-- Action Buttons -->
+              <div class="generator-panel__actions" role="group" aria-label="Generator actions">
+
+                <button
+                  id="generate-btn"
+                  class="action-btn action-btn--primary action-btn--generate"
+                  type="button"
+                  aria-label="Generate a new problem"
+                  aria-live="polite"
+                >
+                  <span class="action-btn__icon" aria-hidden="true">⚡</span>
+                  <span class="action-btn__text">Generate Problem</span>
+                </button>
+
+                <button
+                  id="generate-similar-btn"
+                  class="action-btn action-btn--secondary"
+                  type="button"
+                  aria-label="Generate a similar problem to the current one"
+                >
+                  <span class="action-btn__icon" aria-hidden="true">⊕</span>
+                  <span class="action-btn__text">Generate Similar</span>
+                </button>
+
+                <button
+                  id="reset-btn"
+                  class="action-btn action-btn--ghost action-btn--reset"
+                  type="button"
+                  aria-label="Reset all generator settings"
+                >
+                  <span class="action-btn__icon" aria-hidden="true">↺</span>
+                  <span class="action-btn__text">Reset</span>
+                </button>
+
+              </div>
+              <!-- /generator-panel__actions -->
+
+            </div>
+            <!-- /generator-panel__controls -->
+
+            <!-- Right column: preview / info -->
+            <aside class="generator-panel__sidebar" aria-label="Generator information and tips">
+
+              <div class="generator-info-card" id="generator-info-card">
+                <header class="generator-info-card__header">
+                  <h3 class="generator-info-card__title" id="info-card-topic-name">Select a Topic</h3>
+                  <span class="generator-info-card__week" id="info-card-week-label"></span>
+                </header>
+                <div class="generator-info-card__body">
+                  <p class="generator-info-card__description" id="info-card-description">
+                    Choose a topic from the left panel. A problem will be generated based on your course materials.
+                  </p>
+                  <ul class="generator-info-card__key-concepts" id="info-card-key-concepts" aria-label="Key concepts for selected topic">
+                    <!-- Populated by JS -->
+                  </ul>
+                </div>
+                <footer class="generator-info-card__footer">
+                  <div class="generator-info-card__textbook" id="info-card-textbook">
+                    <span class="info-card-textbook__label">Lay et al., 5th ed.</span>
+                    <span class="info-card-textbook__section" id="info-card-section"></span>
+                  </div>
+                </footer>
+              </div>
+
+              <!-- Recent History mini-list -->
+              <div class="recent-history" aria-labelledby="recent-history-label">
+                <h3 id="recent-history-label" class="recent-history__title">Recent Problems</h3>
+                <ol class="recent-history__list" id="recent-history-list" aria-label="Recently generated problems">
+                  <li class="recent-history__empty" id="recent-history-empty">No problems yet — generate your first one!</li>
+                </ol>
+              </div>
+
+            </aside>
+            <!-- /generator-panel__sidebar -->
+
+          </div>
+          <!-- /generator-panel__layout -->
+
+        </section>
+        <!-- /generator-panel -->
+
+        <!-- ============================================================
+             PROBLEM DISPLAY AREA
+        ============================================================ -->
+        <section
+          id="problem-display"
+          class="problem-display section"
+          aria-labelledby="problem-display-title"
+          aria-live="polite"
+          aria-atomic="false"
+        >
+          <header class="section__header problem-display__header">
+            <div class="problem-display__header-left">
+              <h2 id="problem-display-title" class="section__title">Generated Problem</h2>
+              <div class="problem-display__meta" id="problem-meta" aria-label="Problem metadata">
+                <span class="problem-meta__topic" id="problem-meta-topic"></span>
+                <span class="problem-meta__week" id="problem-meta-week"></span>
+                <span class="problem-meta__difficulty" id="problem-meta-difficulty"></span>
+                <span class="problem-meta__points" id="problem-meta-points"></span>
+              </div>
+            </div>
+            <div class="problem-display__header-right">
+              <div class="problem-display__timer" id="problem-timer" aria-live="off" aria-label="Elapsed time" hidden>
+                <span class="problem-timer__display" id="timer-display">00:00</span>
+                <button id="timer-pause-btn" class="timer-btn" aria-label="Pause timer" type="button">⏸</button>
+              </div>
+              <div class="problem-display__actions">
+                <button id="copy-problem-btn" class="icon-btn" aria-label="Copy problem to clipboard" type="button">
+                  <span aria-hidden="true">⊡</span>
+                </button>
+                <button id="bookmark-btn" class="icon-btn" aria-label="Bookmark this problem" type="button">
+                  <span aria-hidden="true">☆</span>
+                </button>
+                <button id="report-btn" class="icon-btn" aria-label="Report an issue with this problem" type="button">
+                  <span aria-hidden="true">⚑</span>
+                </button>
+              </div>
+            </div>
+          </header>
+
+          <!-- Empty State (before first generation) -->
+          <div class="problem-display__empty-state" id="problem-empty-state" aria-hidden="false">
+            <div class="empty-state__icon" aria-hidden="true">∂</div>
+            <p class="empty-state__message">Your generated problem will appear here.</p>
+            <p class="empty-state__sub">Select a topic and click <strong>Generate Problem</strong> to begin.</p>
+          </div>
+
+          <!-- Problem Content (populated by JS) -->
+          <article class="problem-display__content" id="problem-content" aria-hidden="true">
+
+            <!-- Problem Instructions -->
+            <div class="problem-instructions" id="problem-instructions">
+              <p class="problem-instructions__text" id="problem-instructions-text"></p>
+            </div>
+
+            <!-- Problem Sub-parts -->
+            <div class="problem-parts" id="problem-parts">
+              <!-- Part (a) -->
+              <div class="problem-part" id="problem-part-a" data-part="a" role="region" aria-labelledby="part-a-label">
+                <h3 class="problem-part__label" id="part-a-label">
+                  <span class="problem-part__letter" aria-label="Part A">(a)</span>
+                  <span class="problem-part__points" id="part-a-points"></span>
+                </h3>
+                <div class="problem-part__body" id="part-a-body">
+                  <!-- MathJax/LaTeX placeholder for part (a) statement -->
+                  <div class="math-content" id="part-a-math" aria-label="Mathematical content for part A">
+                    <!-- Populated by JS + MathJax -->
+                  </div>
+                  <!-- Matrix Display for part (a) -->
+                  <div class="matrix-display" id="part-a-matrix" aria-label="Matrix for part A">
+                    <div class="matrix-bracket matrix-bracket--left" aria-hidden="true"></div>
+                    <table class="matrix-table" id="part-a-matrix-table" role="grid" aria-label="Matrix entries">
+                      <!-- Populated by JS -->
+                    </table>
+                    <div class="matrix-bracket matrix-bracket--right" aria-hidden="true"></div>
+                  </div>
+                  <!-- Augmented Matrix Display for part (a) (systems) -->
+                  <div class="augmented-matrix-display" id="part-a-augmented" aria-label="Augmented matrix">
+                    <div class="matrix-bracket matrix-bracket--left" aria-hidden="true"></div>
+                    <table class="matrix-table augmented-matrix-table" id="part-a-augmented-table" role="grid">
+                      <!-- Populated by JS -->
+                    </table>
+                    <div class="matrix-bracket matrix-bracket--right" aria-hidden="true"></div>
+                  </div>
+                  <!-- Vector Display for part (a) -->
+                  <div class="vector-display" id="part-a-vector" aria-label="Vector for part A">
+                    <!-- Populated by JS -->
+                  </div>
+                  <!-- Figure / Diagram placeholder -->
+                  <figure class="problem-figure" id="part-a-figure" aria-labelledby="part-a-figure-caption">
+                    <div class="problem-figure__canvas" id="part-a-canvas" aria-label="Geometric figure">
+                      <!-- SVG or Canvas element populated by JS -->
+                    </div>
+                    <figcaption id="part-a-figure-caption" class="problem-figure__caption"></figcaption>
+                  </figure>
+                </div>
+              </div>
+              <!-- /Part (a) -->
+
+              <!-- Part (b) -->
+              <div class="problem-part" id="problem-part-b" data-part="b" role="region" aria-labelledby="part-b-label">
+                <h3 class="problem-part__label" id="part-b-label">
+                  <span class="problem-part__letter" aria-label="Part B">(b)</span>
+                  <span class="problem-part__points" id="part-b-points"></span>
+                </h3>
+                <div class="problem-part__body" id="part-b-body">
+                  <div class="math-content" id="part-b-math" aria-label="Mathematical content for part B"></div>
+                  <div class="matrix-display" id="part-b-matrix" aria-label="Matrix for part B">
+                    <div class="matrix-bracket matrix-bracket--left" aria-hidden="true"></div>
+                    <table class="matrix-table" id="part-b-matrix-table" role="grid"></table>
+                    <div class="matrix-bracket matrix-bracket--right" aria-hidden="true"></div>
+                  </div>
+                  <div class="vector-display" id="part-b-vector" aria-label="Vector for part B"></div>
+                </div>
+              </div>
+              <!-- /Part (b) -->
+
+              <!-- Part (c) -->
+              <div class="problem-part" id="problem-part-c" data-part="c" role="region" aria-labelledby="part-c-label">
+                <h3 class="problem-part__label" id="part-c-label">
+                  <span class="problem-part__letter" aria-label="Part C">(c)</span>
+                  <span class="problem-part__points" id="part-c-points"></span>
+                </h3>
+                <div class="problem-part__body" id="part-c-body">
+                  <div class="math-content" id="part-c-math" aria-label="Mathematical content for part C"></div>
+                  <div class="matrix-display" id="part-c-matrix" aria-label="Matrix for part C">
+                    <div class="matrix-bracket matrix-bracket--left" aria-hidden="true"></div>
+                    <table class="matrix-table" id="part-c-matrix-table" role="grid"></table>
+                    <div class="matrix-bracket matrix-bracket--right" aria-hidden="true"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- /Part (c) -->
+
+              <!-- Part (d) -->
+              <div class="problem-part" id="problem-part-d" data-part="d" role="region" aria-labelledby="part-d-label">
+                <h3 class="problem-part__label" id="part-d-label">
+                  <span class="problem-part__letter" aria-label="Part D">(d)</span>
+                  <span class="problem-part__points" id="part-d-points"></span>
+                </h3>
+                <div class="problem-part__body" id="part-d-body">
+                  <div class="math-content" id="part-d-math" aria-label="Mathematical content for part D"></div>
+                </div>
+              </div>
+              <!-- /Part (d) -->
+
+            </div>
+            <!-- /problem-parts -->
+
+            <!-- Work Area (student input region) -->
+            <div class="work-area" id="work-area" aria-labelledby="work-area-label">
+              <h3 id="work-area-label" class="work-area__label">Your Work</h3>
+              <div class="work-area__input-region" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Write your solution here" id="student-work-input" spellcheck="false">
+                <!-- Student writes here -->
+              </div>
+              <div class="work-area__toolbar" role="toolbar" aria-label="Work area toolbar">
+                <button class="work-area__tool-btn" aria-label="Clear work area" id="clear-work-btn" type="button">Clear</button>
+                <button class="work-area__tool-btn" aria-label="Mark as solved" id="mark-solved-btn" type="button">Mark Solved ✓</button>
+              </div>
+            </div>
+
+          </article>
+          <!-- /problem-content -->
+
+        </section>
+        <!-- /problem-display -->
+
+        <!-- ============================================================
+             SOLUTION AREA
+        ============================================================ -->
+        <section
+          id="solution-area"
+          class="solution-area section"
+          aria-labelledby="solution-area-title"
+          aria-live="polite"
+        >
+          <header class="section__header solution-area__header">
+            <h2 id="solution-area-title" class="section__title">Solution</h2>
+            <div class="solution-area__controls">
+              <button
+                id="reveal-solution-btn"
+                class="action-btn action-btn--solution"
+                type="button"
+                aria-expanded="false"
+                aria-controls="solution-content"
+              >
+                <span class="action-btn__icon" aria-hidden="true">👁</span>
+                <span class="action-btn__text">Show Solution</span>
+              </button>
+              <button
+                id="reveal-answer-only-btn"
+                class="action-btn action-btn--ghost"
+                type="button"
+                aria-expanded="false"
+                aria-controls="solution-final-answer"
+              >
+                <span class="action-btn__text">Answer Only</span>
+              </button>
+            </div>
+          </header>
+
+          <div class="solution-content" id="solution-content" aria-hidden="true">
+
+            <!-- Final Answer -->
+            <div class="solution-final-answer" id="solution-final-answer" aria-labelledby="final-answer-label">
+              <h3 id="final-answer-label" class="solution-block__title solution-block__title--answer">Final Answer</h3>
+              <div class="solution-answer-box">
+                <div class="math-content" id="solution-answer-math" aria-label="Final answer in mathematical notation">
+                  <!-- Populated by JS + MathJax -->
+                </div>
+                <!-- Matrix/vector answer display -->
+                <div class="matrix-display" id="solution-answer-matrix" aria-label="Answer matrix">
+                  <div class="matrix-bracket matrix-bracket--left" aria-hidden="true"></div>
+                  <table class="matrix-table" id="solution-answer-matrix-table" role="grid"></table>
+                  <div class="matrix-bracket matrix-bracket--right" aria-hidden="true"></div>
+                </div>
+                <div class="vector-display" id="solution-answer-vector" aria-label="Answer vector"></div>
+              </div>
+            </div>
+
+            <!-- Step-by-Step Solution -->
+            <div class="solution-steps" id="solution-steps" aria-labelledby="steps-label">
+              <h3 id="steps-label" class="solution-block__title">Step-by-Step Solution</h3>
+              <ol class="solution-steps__list" id="solution-steps-list" aria-label="Solution steps">
+                <!-- Each <li class="solution-step"> populated by JS -->
+                <!-- Template:
+                  <li class="solution-step" data-step="1">
+                    <div class="solution-step__header">
+                      <span class="solution-step__number">Step 1</span>
+                      <span class="solution-step__title">...</span>
+                    </div>
+                    <div class="solution-step__body">
+                      <p class="solution-step__explanation">...</p>
+                      <div class="math-content solution-step__math">...</div>
+                      <div class="matrix-display solution-step__matrix">...</div>
+                    </div>
+                  </li>
+                -->
+              </ol>
+            </div>
+
+            <!-- Theory Reference -->
+            <div class="solution-theory" id="solution-theory" aria-labelledby="theory-label">
+              <h3 id="theory-label" class="solution-block__title">Theory &amp; Definitions Used</h3>
+              <div class="solution-theory__body" id="solution-theory-body">
+                <!-- Theorem/definition boxes populated by JS -->
+                <!-- Template:
+                  <div class="theory-box">
+                    <div class="theory-box__tag">Theorem</div>
+                    <div class="theory-box__title">...</div>
+                    <div class="theory-box__statement math-content">...</div>
+                    <div class="theory-box__reference">Lay et al., §X.X</div>
+                  </div>
+                -->
+              </div>
+            </div>
+
+            <!-- Common Mistakes -->
+            <div class="solution-mistakes" id="solution-mistakes" aria-labelledby="mistakes-label">
+              <h3 id="mistakes-label" class="solution-block__title solution-block__title--warning">Common Mistakes</h3>
+              <ul class="solution-mistakes__list" id="solution-mistakes-list" aria-label="Common mistakes to avoid">
+                <!-- Populated by JS -->
+              </ul>
+            </div>
+
+            <!-- Related Problems Suggestion -->
+            <div class="solution-related" id="solution-related" aria-labelledby="related-label">
+              <h3 id="related-label" class="solution-block__title">Practice More</h3>
+              <div class="solution-related__suggestions" id="solution-related-suggestions">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+          </div>
+          <!-- /solution-content -->
+
+        </section>
+        <!-- /solution-area -->
+
+        <!-- ============================================================
+             SPECIAL PROBLEM TYPE CONTAINERS
+        ============================================================ -->
+        <section
+          id="special-problems"
+          class="special-problems section"
+          aria-labelledby="special-problems-title"
+        >
+          <header class="section__header">
+            <h2 id="special-problems-title" class="section__title">Problem Types</h2>
+            <p class="section__subtitle">Dedicated generators for common linear algebra problem structures</p>
+          </header>
+
+          <div class="special-problems__grid">
+
+            <!-- Matrix Problems -->
+            <article class="special-card" id="special-matrix-problems" aria-labelledby="special-matrix-title">
+              <header class="special-card__header">
+                <h3 id="special-matrix-title" class="special-card__title">
+                  <span class="special-card__icon" aria-hidden="true">⊡</span> Matrix Problems
+                </h3>
+                <span class="special-card__badge">Weeks 1–4</span>
+              </header>
+              <div class="special-card__body">
+                <p class="special-card__desc">Addition, multiplication, commutator, transpose, inverse, polynomial of a matrix.</p>
+                <div class="special-card__options" role="group" aria-label="Matrix problem sub-types">
+                  <label class="special-chip">
+                    <input type="checkbox" name="matrix-sub" value="multiply" class="special-chip__input" />
+                    <span class="special-chip__label">Multiplication</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="matrix-sub" value="commutator" class="special-chip__input" />
+                    <span class="special-chip__label">Commutator [A,B]</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="matrix-sub" value="polynomial" class="special-chip__input" />
+                    <span class="special-chip__label">f(A)</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="matrix-sub" value="inverse" class="special-chip__input" />
+                    <span class="special-chip__label">Inverse A⁻¹</span>
+                  </label>
+                </div>
+              </div>
+              <footer class="special-card__footer">
+                <button class="action-btn action-btn--special" type="button" id="gen-matrix-btn" aria-label="Generate matrix problem">
+                  Generate
+                </button>
+              </footer>
+            </article>
+            <!-- /Matrix Problems -->
+
+            <!-- Determinant Problems -->
+            <article class="special-card" id="special-determinant-problems" aria-labelledby="special-det-title">
+              <header class="special-card__header">
+                <h3 id="special-det-title" class="special-card__title">
+                  <span class="special-card__icon" aria-hidden="true">|·|</span> Determinant Problems
+                </h3>
+                <span class="special-card__badge">Week 5</span>
+              </header>
+              <div class="special-card__body">
+                <p class="special-card__desc">Cofactor expansion, row reduction method, properties, coplanarity test, Cramer's rule.</p>
+                <div class="special-card__options" role="group" aria-label="Determinant problem sub-types">
+                  <label class="special-chip">
+                    <input type="checkbox" name="det-sub" value="cofactor" class="special-chip__input" />
+                    <span class="special-chip__label">Cofactor Expansion</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="det-sub" value="coplanar" class="special-chip__input" />
+                    <span class="special-chip__label">Coplanarity</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="det-sub" value="cramers" class="special-chip__input" />
+                    <span class="special-chip__label">Cramer's Rule</span>
+                  </label>
+                </div>
+              </div>
+              <footer class="special-card__footer">
+                <button class="action-btn action-btn--special" type="button" id="gen-determinant-btn" aria-label="Generate determinant problem">
+                  Generate
+                </button>
+              </footer>
+            </article>
+            <!-- /Determinant Problems -->
+
+            <!-- Linear Independence Problems -->
+            <article class="special-card" id="special-linear-independence-problems" aria-labelledby="special-linind-title">
+              <header class="special-card__header">
+                <h3 id="special-linind-title" class="special-card__title">
+                  <span class="special-card__icon" aria-hidden="true">⊥</span> Linear Independence
+                </h3>
+                <span class="special-card__badge">Weeks 2, 6–7</span>
+              </header>
+              <div class="special-card__body">
+                <p class="special-card__desc">Determine independence, find spanning sets, express as linear combinations.</p>
+                <div class="special-card__options" role="group" aria-label="Linear independence sub-types">
+                  <label class="special-chip">
+                    <input type="checkbox" name="linind-sub" value="test" class="special-chip__input" />
+                    <span class="special-chip__label">Independence Test</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="linind-sub" value="span" class="special-chip__input" />
+                    <span class="special-chip__label">Spanning Set</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="linind-sub" value="combination" class="special-chip__input" />
+                    <span class="special-chip__label">Linear Combination</span>
+                  </label>
+                </div>
+              </div>
+              <footer class="special-card__footer">
+                <button class="action-btn action-btn--special" type="button" id="gen-linind-btn" aria-label="Generate linear independence problem">
+                  Generate
+                </button>
+              </footer>
+            </article>
+            <!-- /Linear Independence Problems -->
+
+            <!-- Transformation Problems -->
+            <article class="special-card" id="special-transformation-problems" aria-labelledby="special-transf-title">
+              <header class="special-card__header">
+                <h3 id="special-transf-title" class="special-card__title">
+                  <span class="special-card__icon" aria-hidden="true">↗</span> Transformation Problems
+                </h3>
+                <span class="special-card__badge">Weeks 3, 9</span>
+              </header>
+              <div class="special-card__body">
+                <p class="special-card__desc">Linearity test, matrix representation, kernel, image, standard matrix.</p>
+                <div class="special-card__options" role="group" aria-label="Transformation sub-types">
+                  <label class="special-chip">
+                    <input type="checkbox" name="transf-sub" value="linearity" class="special-chip__input" />
+                    <span class="special-chip__label">Linearity Test</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="transf-sub" value="matrix-rep" class="special-chip__input" />
+                    <span class="special-chip__label">Matrix Representation</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="transf-sub" value="kernel-image" class="special-chip__input" />
+                    <span class="special-chip__label">Kernel &amp; Image</span>
+                  </label>
+                </div>
+              </div>
+              <footer class="special-card__footer">
+                <button class="action-btn action-btn--special" type="button" id="gen-transformation-btn" aria-label="Generate transformation problem">
+                  Generate
+                </button>
+              </footer>
+            </article>
+            <!-- /Transformation Problems -->
+
+            <!-- Vector Space Problems -->
+            <article class="special-card" id="special-vector-space-problems" aria-labelledby="special-vs-title">
+              <header class="special-card__header">
+                <h3 id="special-vs-title" class="special-card__title">
+                  <span class="special-card__icon" aria-hidden="true">𝕍</span> Vector Space Problems
+                </h3>
+                <span class="special-card__badge">Weeks 6–7</span>
+              </header>
+              <div class="special-card__body">
+                <p class="special-card__desc">Subspace verification, null space, column space, row space, T/F proofs.</p>
+                <div class="special-card__options" role="group" aria-label="Vector space sub-types">
+                  <label class="special-chip">
+                    <input type="checkbox" name="vs-sub" value="subspace-test" class="special-chip__input" />
+                    <span class="special-chip__label">Subspace Test</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="vs-sub" value="null-col" class="special-chip__input" />
+                    <span class="special-chip__label">Null &amp; Col Space</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="vs-sub" value="tf" class="special-chip__input" />
+                    <span class="special-chip__label">True / False</span>
+                  </label>
+                </div>
+              </div>
+              <footer class="special-card__footer">
+                <button class="action-btn action-btn--special" type="button" id="gen-vs-btn" aria-label="Generate vector space problem">
+                  Generate
+                </button>
+              </footer>
+            </article>
+            <!-- /Vector Space Problems -->
+
+            <!-- Basis Problems -->
+            <article class="special-card" id="special-basis-problems" aria-labelledby="special-basis-title">
+              <header class="special-card__header">
+                <h3 id="special-basis-title" class="special-card__title">
+                  <span class="special-card__icon" aria-hidden="true">ℬ</span> Basis Problems
+                </h3>
+                <span class="special-card__badge">Weeks 7–8</span>
+              </header>
+              <div class="special-card__body">
+                <p class="special-card__desc">Find bases for subspaces, verify basis properties, coordinate vectors, change of basis.</p>
+                <div class="special-card__options" role="group" aria-label="Basis problem sub-types">
+                  <label class="special-chip">
+                    <input type="checkbox" name="basis-sub" value="find-basis" class="special-chip__input" />
+                    <span class="special-chip__label">Find Basis</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="basis-sub" value="coordinate" class="special-chip__input" />
+                    <span class="special-chip__label">Coordinate Vector</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="basis-sub" value="change-basis" class="special-chip__input" />
+                    <span class="special-chip__label">Change of Basis Matrix</span>
+                  </label>
+                </div>
+              </div>
+              <footer class="special-card__footer">
+                <button class="action-btn action-btn--special" type="button" id="gen-basis-btn" aria-label="Generate basis problem">
+                  Generate
+                </button>
+              </footer>
+            </article>
+            <!-- /Basis Problems -->
+
+            <!-- Rank Problems -->
+            <article class="special-card" id="special-rank-problems" aria-labelledby="special-rank-title">
+              <header class="special-card__header">
+                <h3 id="special-rank-title" class="special-card__title">
+                  <span class="special-card__icon" aria-hidden="true">ρ</span> Rank Problems
+                </h3>
+                <span class="special-card__badge">Week 7</span>
+              </header>
+              <div class="special-card__body">
+                <p class="special-card__desc">Compute rank, apply Rank-Nullity Theorem, determine consistency conditions.</p>
+                <div class="special-card__options" role="group" aria-label="Rank problem sub-types">
+                  <label class="special-chip">
+                    <input type="checkbox" name="rank-sub" value="compute" class="special-chip__input" />
+                    <span class="special-chip__label">Compute Rank</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="rank-sub" value="rank-nullity" class="special-chip__input" />
+                    <span class="special-chip__label">Rank-Nullity</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="rank-sub" value="consistency" class="special-chip__input" />
+                    <span class="special-chip__label">Consistency</span>
+                  </label>
+                </div>
+              </div>
+              <footer class="special-card__footer">
+                <button class="action-btn action-btn--special" type="button" id="gen-rank-btn" aria-label="Generate rank problem">
+                  Generate
+                </button>
+              </footer>
+            </article>
+            <!-- /Rank Problems -->
+
+            <!-- Eigenvalue Problems -->
+            <article class="special-card" id="special-eigenvalue-problems" aria-labelledby="special-eval-title">
+              <header class="special-card__header">
+                <h3 id="special-eval-title" class="special-card__title">
+                  <span class="special-card__icon" aria-hidden="true">λ</span> Eigenvalue Problems
+                </h3>
+                <span class="special-card__badge">Weeks 8–9</span>
+              </header>
+              <div class="special-card__body">
+                <p class="special-card__desc">Characteristic polynomial, eigenvalues (real and complex), eigenspaces, algebraic vs geometric multiplicity.</p>
+                <div class="special-card__options" role="group" aria-label="Eigenvalue sub-types">
+                  <label class="special-chip">
+                    <input type="checkbox" name="eval-sub" value="char-poly" class="special-chip__input" />
+                    <span class="special-chip__label">Char. Polynomial</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="eval-sub" value="real" class="special-chip__input" />
+                    <span class="special-chip__label">Real Eigenvalues</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="eval-sub" value="complex" class="special-chip__input" />
+                    <span class="special-chip__label">Complex Eigenvalues</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="eval-sub" value="multiplicity" class="special-chip__input" />
+                    <span class="special-chip__label">Multiplicity</span>
+                  </label>
+                </div>
+              </div>
+              <footer class="special-card__footer">
+                <button class="action-btn action-btn--special" type="button" id="gen-eigenvalue-btn" aria-label="Generate eigenvalue problem">
+                  Generate
+                </button>
+              </footer>
+            </article>
+            <!-- /Eigenvalue Problems -->
+
+            <!-- Eigenvector Problems -->
+            <article class="special-card" id="special-eigenvector-problems" aria-labelledby="special-evec-title">
+              <header class="special-card__header">
+                <h3 id="special-evec-title" class="special-card__title">
+                  <span class="special-card__icon" aria-hidden="true">𝑣</span> Eigenvector Problems
+                </h3>
+                <span class="special-card__badge">Weeks 8–9</span>
+              </header>
+              <div class="special-card__body">
+                <p class="special-card__desc">Find eigenvectors, eigenspaces (basis), use Av = λv to compute A^n·v.</p>
+                <div class="special-card__options" role="group" aria-label="Eigenvector sub-types">
+                  <label class="special-chip">
+                    <input type="checkbox" name="evec-sub" value="find-evec" class="special-chip__input" />
+                    <span class="special-chip__label">Find Eigenvectors</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="evec-sub" value="eigenspace" class="special-chip__input" />
+                    <span class="special-chip__label">Eigenspace Basis</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="evec-sub" value="power-compute" class="special-chip__input" />
+                    <span class="special-chip__label">A^n · v Computation</span>
+                  </label>
+                </div>
+              </div>
+              <footer class="special-card__footer">
+                <button class="action-btn action-btn--special" type="button" id="gen-eigenvector-btn" aria-label="Generate eigenvector problem">
+                  Generate
+                </button>
+              </footer>
+            </article>
+            <!-- /Eigenvector Problems -->
+
+            <!-- Diagonalization Problems -->
+            <article class="special-card" id="special-diagonalization-problems" aria-labelledby="special-diag-title">
+              <header class="special-card__header">
+                <h3 id="special-diag-title" class="special-card__title">
+                  <span class="special-card__icon" aria-hidden="true">𝐷</span> Diagonalization Problems
+                </h3>
+                <span class="special-card__badge">Week 9</span>
+              </header>
+              <div class="special-card__body">
+                <p class="special-card__desc">Diagonalize A = PDP⁻¹, compute A^n via diagonalization, apply f(A) = Pf(D)P⁻¹.</p>
+                <div class="special-card__options" role="group" aria-label="Diagonalization sub-types">
+                  <label class="special-chip">
+                    <input type="checkbox" name="diag-sub" value="pdp" class="special-chip__input" />
+                    <span class="special-chip__label">Find P, D</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="diag-sub" value="power" class="special-chip__input" />
+                    <span class="special-chip__label">Compute A^n</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="diag-sub" value="func" class="special-chip__input" />
+                    <span class="special-chip__label">f(A) via Diag.</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="diag-sub" value="is-diag" class="special-chip__input" />
+                    <span class="special-chip__label">Is A Diagonalizable?</span>
+                  </label>
+                </div>
+              </div>
+              <footer class="special-card__footer">
+                <button class="action-btn action-btn--special" type="button" id="gen-diagonalization-btn" aria-label="Generate diagonalization problem">
+                  Generate
+                </button>
+              </footer>
+            </article>
+            <!-- /Diagonalization Problems -->
+
+            <!-- Gram-Schmidt / Orthogonality Problems -->
+            <article class="special-card" id="special-orthogonality-problems" aria-labelledby="special-orth-title">
+              <header class="special-card__header">
+                <h3 id="special-orth-title" class="special-card__title">
+                  <span class="special-card__icon" aria-hidden="true">⟂</span> Gram–Schmidt &amp; Orthogonality
+                </h3>
+                <span class="special-card__badge">Week 9</span>
+              </header>
+              <div class="special-card__body">
+                <p class="special-card__desc">Gram–Schmidt process, orthonormal basis, orthogonal complement, projections.</p>
+                <div class="special-card__options" role="group" aria-label="Orthogonality sub-types">
+                  <label class="special-chip">
+                    <input type="checkbox" name="orth-sub" value="gram-schmidt" class="special-chip__input" />
+                    <span class="special-chip__label">Gram–Schmidt</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="orth-sub" value="orthonormal" class="special-chip__input" />
+                    <span class="special-chip__label">Orthonormal Basis</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="orth-sub" value="complement" class="special-chip__input" />
+                    <span class="special-chip__label">Orthogonal Complement</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="orth-sub" value="projection" class="special-chip__input" />
+                    <span class="special-chip__label">Projection</span>
+                  </label>
+                </div>
+              </div>
+              <footer class="special-card__footer">
+                <button class="action-btn action-btn--special" type="button" id="gen-orth-btn" aria-label="Generate orthogonality problem">
+                  Generate
+                </button>
+              </footer>
+            </article>
+            <!-- /Gram-Schmidt / Orthogonality Problems -->
+
+            <!-- Mixed Final Exam Problems -->
+            <article class="special-card special-card--mixed" id="special-mixed-problems" aria-labelledby="special-mixed-title">
+              <header class="special-card__header">
+                <h3 id="special-mixed-title" class="special-card__title">
+                  <span class="special-card__icon" aria-hidden="true">∞</span> Mixed Final Exam Problems
+                </h3>
+                <span class="special-card__badge special-card__badge--final">Week 10</span>
+              </header>
+              <div class="special-card__body">
+                <p class="special-card__desc">Randomly combined problems from all topics — true exam simulation from course materials.</p>
+                <div class="special-card__options" role="group" aria-label="Mixed problem options">
+                  <label class="special-chip">
+                    <input type="checkbox" name="mixed-sub" value="gaussian" class="special-chip__input" checked />
+                    <span class="special-chip__label">Gaussian Elimination</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="mixed-sub" value="eigendiag" class="special-chip__input" checked />
+                    <span class="special-chip__label">Eigen &amp; Diag</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="mixed-sub" value="subspaces" class="special-chip__input" checked />
+                    <span class="special-chip__label">Subspaces</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="mixed-sub" value="basis-rank" class="special-chip__input" checked />
+                    <span class="special-chip__label">Basis &amp; Rank</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="mixed-sub" value="gramschmidt" class="special-chip__input" checked />
+                    <span class="special-chip__label">Gram–Schmidt</span>
+                  </label>
+                  <label class="special-chip">
+                    <input type="checkbox" name="mixed-sub" value="cobasis" class="special-chip__input" checked />
+                    <span class="special-chip__label">Change of Basis</span>
+                  </label>
+                </div>
+              </div>
+              <footer class="special-card__footer">
+                <button class="action-btn action-btn--special action-btn--mixed" type="button" id="gen-mixed-btn" aria-label="Generate mixed problem">
+                  Generate Mixed
+                </button>
+              </footer>
+            </article>
+            <!-- /Mixed Final Exam Problems -->
+
+          </div>
+          <!-- /special-problems__grid -->
+
+        </section>
+        <!-- /special-problems -->
+
+        <!-- ============================================================
+             EXAM MODE SECTION — Mock Final Exam Generator
+        ============================================================ -->
+        <section
+          id="exam-mode"
+          class="exam-mode section"
+          aria-labelledby="exam-mode-title"
+        >
+          <header class="section__header">
+            <h2 id="exam-mode-title" class="section__title">Mock Final Exam Generator</h2>
+            <p class="section__subtitle">
+              Simulate the AITU Linear Algebra written exam — 70 pts / 100 min format (Lay et al., 5th ed.)
+            </p>
+          </header>
+
+          <div class="exam-mode__layout">
+
+            <!-- Exam Configuration -->
+            <div class="exam-config" aria-labelledby="exam-config-label">
+              <h3 id="exam-config-label" class="exam-config__title">Exam Configuration</h3>
+
+              <!-- Exam Length -->
+              <fieldset class="control-group" id="exam-length-group">
+                <legend class="control-group__legend">Number of Questions</legend>
+                <div class="exam-length-selector" role="group" aria-labelledby="exam-length-label">
+                  <span id="exam-length-label" class="visually-hidden">Select exam length</span>
+
+                  <label class="exam-length-option">
+                    <input type="radio" name="exam-length" value="10" class="exam-length-option__input" />
+                    <span class="exam-length-option__card">
+                      <span class="exam-length-option__num">10</span>
+                      <span class="exam-length-option__label">Quick Practice</span>
+                      <span class="exam-length-option__time">~40 min</span>
+                    </span>
+                  </label>
+
+                  <label class="exam-length-option">
+                    <input type="radio" name="exam-length" value="20" class="exam-length-option__input" checked />
+                    <span class="exam-length-option__card">
+                      <span class="exam-length-option__num">20</span>
+                      <span class="exam-length-option__label">Half Exam</span>
+                      <span class="exam-length-option__time">~70 min</span>
+                    </span>
+                  </label>
+
+                  <label class="exam-length-option">
+                    <input type="radio" name="exam-length" value="30" class="exam-length-option__input" />
+                    <span class="exam-length-option__card">
+                      <span class="exam-length-option__num">30</span>
+                      <span class="exam-length-option__label">Full Simulation</span>
+                      <span class="exam-length-option__time">~100 min</span>
+                    </span>
+                  </label>
+
+                </div>
+              </fieldset>
+              <!-- /exam-length-group -->
+
+              <!-- Topic Coverage -->
+              <fieldset class="control-group" id="exam-topics-group">
+                <legend class="control-group__legend">Topic Coverage</legend>
+                <div class="exam-topics-options" role="group" aria-labelledby="exam-topics-label">
+                  <span id="exam-topics-label" class="visually-hidden">Exam topic coverage</span>
+
+                  <label class="exam-topic-option">
+                    <input type="radio" name="exam-coverage" value="all" class="exam-topic-option__input" checked />
+                    <span class="exam-topic-option__label">All 10 Weeks</span>
+                  </label>
+                  <label class="exam-topic-option">
+                    <input type="radio" name="exam-coverage" value="first-half" class="exam-topic-option__input" />
+                    <span class="exam-topic-option__label">Weeks 1–5 (Midterm)</span>
+                  </label>
+                  <label class="exam-topic-option">
+                    <input type="radio" name="exam-coverage" value="second-half" class="exam-topic-option__input" />
+                    <span class="exam-topic-option__label">Weeks 6–10 (Endterm)</span>
+                  </label>
+                  <label class="exam-topic-option">
+                    <input type="radio" name="exam-coverage" value="custom" class="exam-topic-option__input" />
+                    <span class="exam-topic-option__label">Custom Selection</span>
+                  </label>
+
+                </div>
+              </fieldset>
+              <!-- /exam-topics-group -->
+
+              <!-- Exam Options -->
+              <div class="exam-options" role="group" aria-labelledby="exam-options-label">
+                <h4 id="exam-options-label" class="exam-options__title">Exam Options</h4>
+
+                <label class="toggle-option">
+                  <input type="checkbox" id="exam-timed-mode" name="exam-timed" class="toggle-option__input" />
+                  <span class="toggle-option__slider" aria-hidden="true"></span>
+                  <span class="toggle-option__label">Timed Mode (100 minutes)</span>
+                </label>
+
+                <label class="toggle-option">
+                  <input type="checkbox" id="exam-show-points" name="exam-points" class="toggle-option__input" checked />
+                  <span class="toggle-option__slider" aria-hidden="true"></span>
+                  <span class="toggle-option__label">Show Point Values</span>
+                </label>
+
+                <label class="toggle-option">
+                  <input type="checkbox" id="exam-lock-solutions" name="exam-lock" class="toggle-option__input" />
+                  <span class="toggle-option__slider" aria-hidden="true"></span>
+                  <span class="toggle-option__label">Lock Solutions Until Submission</span>
+                </label>
+
+                <label class="toggle-option">
+                  <input type="checkbox" id="exam-shuffle" name="exam-shuffle" class="toggle-option__input" />
+                  <span class="toggle-option__slider" aria-hidden="true"></span>
+                  <span class="toggle-option__label">Shuffle Question Order</span>
+                </label>
+
+              </div>
+              <!-- /exam-options -->
+
+              <!-- Generate Exam Button -->
+              <div class="exam-config__action">
+                <button
+                  id="generate-exam-btn"
+                  class="action-btn action-btn--primary action-btn--exam"
+                  type="button"
+                  aria-label="Generate mock final exam"
+                >
+                  <span class="action-btn__icon" aria-hidden="true">📝</span>
+                  <span class="action-btn__text">Generate Mock Exam</span>
+                </button>
+                <button
+                  id="download-exam-pdf-btn"
+                  class="action-btn action-btn--ghost"
+                  type="button"
+                  aria-label="Download exam as PDF"
+                  disabled
+                >
+                  <span class="action-btn__icon" aria-hidden="true">⬇</span>
+                  <span class="action-btn__text">Download as PDF</span>
+                </button>
+              </div>
+
+            </div>
+            <!-- /exam-config -->
+
+            <!-- Exam Paper Area -->
+            <div class="exam-paper" id="exam-paper" aria-labelledby="exam-paper-title" aria-live="polite">
+
+              <!-- Exam Header (mimics AITU format) -->
+              <div class="exam-paper__header" id="exam-paper-header" aria-hidden="true">
+                <div class="exam-paper__institution">Astana IT University</div>
+                <div class="exam-paper__department">School of Artificial Intelligence and Data Science</div>
+                <div class="exam-paper__course">Discipline: Linear Algebra</div>
+                <div class="exam-paper__meta-row">
+                  <span class="exam-paper__meta-item" id="exam-meta-variant">Mock Exam — Practice</span>
+                  <span class="exam-paper__meta-item" id="exam-meta-duration">Duration: 100 minutes</span>
+                  <span class="exam-paper__meta-item" id="exam-meta-points">Total: 70 points</span>
+                </div>
+                <div class="exam-paper__student-info">
+                  <label class="exam-paper__student-field">
+                    Student's name: <span class="exam-paper__field-line" id="exam-student-name" contenteditable="true" role="textbox" aria-label="Student name">___________________________</span>
+                  </label>
+                  <label class="exam-paper__student-field">
+                    Group: <span class="exam-paper__field-line" id="exam-student-group" contenteditable="true" role="textbox" aria-label="Student group">___________</span>
+                  </label>
+                </div>
+                <p class="exam-paper__instructions">
+                  <em>Instructions: Show all your work in the space provided below each problem. Partial credit will be given for correct method even if the final answer contains an arithmetic error.</em>
+                </p>
+              </div>
+              <!-- /exam-paper-header -->
+
+              <!-- Exam Timer Bar -->
+              <div class="exam-timer-bar" id="exam-timer-bar" hidden aria-live="assertive">
+                <span class="exam-timer-bar__label">Time Remaining:</span>
+                <span class="exam-timer-bar__display" id="exam-timer-display" aria-live="off">1:40:00</span>
+                <div class="exam-timer-bar__progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" id="exam-timer-progress">
+                  <div class="exam-timer-bar__fill" id="exam-timer-fill"></div>
+                </div>
+                <button class="exam-timer-btn" id="exam-timer-pause-btn" type="button" aria-label="Pause exam timer">⏸</button>
+              </div>
+
+              <!-- Score Grid (AITU-style) -->
+              <div class="exam-score-grid" id="exam-score-grid" hidden aria-label="Score tracking table">
+                <table class="score-grid-table" role="grid" aria-label="Problem scores">
+                  <thead>
+                    <tr>
+                      <!-- Populated by JS based on number of problems -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <!-- Populated by JS -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /exam-score-grid -->
+
+              <!-- Empty State -->
+              <div class="exam-paper__empty" id="exam-paper-empty">
+                <div class="empty-state__icon" aria-hidden="true">📋</div>
+                <p class="empty-state__message">Your mock exam will appear here.</p>
+                <p class="empty-state__sub">Configure the exam options and click <strong>Generate Mock Exam</strong>.</p>
+              </div>
+
+              <!-- Exam Problems List -->
+              <ol class="exam-problems-list" id="exam-problems-list" aria-label="Exam problems" hidden>
+                <!-- Each item: <li class="exam-problem" data-problem-num="1" data-topic="..." data-points="..."> -->
+              </ol>
+
+              <!-- Exam Solution Area -->
+              <div class="exam-solutions" id="exam-solutions" hidden aria-labelledby="exam-solutions-label">
+                <h3 id="exam-solutions-label" class="exam-solutions__title">Answer Key &amp; Solutions</h3>
+                <div class="exam-solutions__body" id="exam-solutions-body" aria-live="polite">
+                  <!-- Populated by JS after submission/reveal -->
+                </div>
+                <div class="exam-solutions__actions">
+                  <button class="action-btn action-btn--primary" id="reveal-all-solutions-btn" type="button">
+                    Reveal All Solutions
+                  </button>
+                  <button class="action-btn action-btn--ghost" id="new-exam-btn" type="button">
+                    Generate New Exam
+                  </button>
+                </div>
+              </div>
+              <!-- /exam-solutions -->
+
+            </div>
+            <!-- /exam-paper -->
+
+          </div>
+          <!-- /exam-mode__layout -->
+
+        </section>
+        <!-- /exam-mode -->
+
+        <!-- ============================================================
+             TOPIC MODULES — Week-by-Week
+        ============================================================ -->
+        <section
+          id="topic-modules"
+          class="topic-modules section"
+          aria-labelledby="topic-modules-title"
+        >
+          <header class="section__header">
+            <h2 id="topic-modules-title" class="section__title">Topic Modules</h2>
+            <p class="section__subtitle">Deep-dive into each week of the course with targeted practice</p>
+          </header>
+
+          <!-- ======================================================
+               WEEK 1 — Systems of Linear Equations
+          ====================================================== -->
+          <article
+            id="week-1"
+            class="week-module"
+            data-week="1"
+            aria-labelledby="week-1-title"
+          >
+            <header class="week-module__header">
+              <div class="week-module__badge" aria-hidden="true">01</div>
+              <div class="week-module__title-block">
+                <h3 id="week-1-title" class="week-module__title">Linear Systems &amp; Vectors</h3>
+                <p class="week-module__topics-summary">Systems of Linear Equations · Row Reduction · Echelon Forms · Vector Equations · Matrix Equation Ax=b</p>
+              </div>
+              <button class="week-module__toggle-btn" type="button" aria-expanded="false" aria-controls="week-1-body" aria-label="Expand Week 1 module">
+                <span class="week-toggle-icon" aria-hidden="true">▾</span>
+              </button>
+            </header>
+
+            <div class="week-module__body" id="week-1-body" hidden>
+
+              <!-- Topic Information -->
+              <div class="week-module__info" aria-labelledby="week-1-info-label">
+                <h4 id="week-1-info-label" class="week-module__section-title">Key Concepts</h4>
+                <div class="week-module__info-body">
+                  <ul class="concept-list">
+                    <li class="concept-list__item">
+                      <span class="concept-list__term">Linear equation:</span>
+                      <span class="concept-list__desc math-content">a₁x₁ + a₂x₂ + … + aₙxₙ = b</span>
+                    </li>
+                    <li class="concept-list__item">
+                      <span class="concept-list__term">Consistent / Inconsistent systems</span>
+                    </li>
+                    <li class="concept-list__item">
+                      <span class="concept-list__term">Coefficient matrix vs Augmented matrix</span>
+                    </li>
+                    <li class="concept-list__item">
+                      <span class="concept-list__term">Elementary row operations:</span>
+                      <span class="concept-list__desc">Replacement, Interchange, Scaling</span>
+                    </li>
+                    <li class="concept-list__item">
+                      <span class="concept-list__term">Echelon form (REF) and Reduced Echelon form (RREF)</span>
+                    </li>
+                    <li class="concept-list__item">
+                      <span class="concept-list__term">Pivot positions and pivot columns</span>
+                    </li>
+                    <li class="concept-list__item">
+                      <span class="concept-list__term">Free variables and parametric form</span>
+                    </li>
+                  </ul>
+                  <div class="week-module__textbook-ref">
+                    <span class="textbook-ref__book">Lay et al., 5th ed.</span>
+                    <span class="textbook-ref__sections">§1.1, §1.2, §1.3, §1.4</span>
+                  </div>
+                </div>
+              </div>
+              <!-- /week-1-info -->
+
+              <!-- Generator Options for Week 1 -->
+              <div class="week-module__generator" aria-labelledby="week-1-gen-label">
+                <h4 id="week-1-gen-label" class="week-module__section-title">Generate Week 1 Problem</h4>
+                <div class="week-generator-controls">
+                  <select class="week-generator__topic-select" id="w1-topic-select" name="w1-topic" aria-label="Week 1 topic">
+                    <option value="sle-2x2">2×2 System — unique solution</option>
+                    <option value="sle-3x3">3×3 System — Gaussian elimination</option>
+                    <option value="sle-3x4">3 equations, 4 unknowns — parametric form</option>
+                    <option value="rref">RREF computation</option>
+                    <option value="pivot">Identify pivot positions</option>
+                    <option value="vector-eq">Vector equation</option>
+                    <option value="matrix-eq">Ax = b consistency</option>
+                  </select>
+                  <select class="week-generator__difficulty-select" id="w1-diff-select" name="w1-difficulty" aria-label="Difficulty for week 1">
+                    <option value="easy">Basic</option>
+                    <option value="intermediate" selected>Intermediate</option>
+                    <option value="hard">Advanced</option>
+                  </select>
+                  <button class="action-btn action-btn--week" type="button" id="gen-week1-btn" aria-label="Generate Week 1 problem">
+                    Generate
+                  </button>
+                </div>
+              </div>
+              <!-- /week-1-generator -->
+
+              <!-- Generated Exercises for Week 1 -->
+              <div class="week-module__exercises" id="week-1-exercises" aria-labelledby="week-1-exercises-label" aria-live="polite">
+                <h4 id="week-1-exercises-label" class="week-module__section-title">Generated Exercises</h4>
+                <div class="week-exercises-list" id="week-1-exercises-list">
+                  <p class="week-exercises-empty">No exercises generated yet for Week 1.</p>
+                </div>
+              </div>
+
+              <!-- Generated Solutions for Week 1 -->
+              <div class="week-module__solutions" id="week-1-solutions" aria-labelledby="week-1-solutions-label" aria-live="polite">
+                <h4 id="week-1-solutions-label" class="week-module__section-title">Solutions</h4>
+                <div class="week-solutions-list" id="week-1-solutions-list">
+                  <p class="week-solutions-empty">Solutions will appear after generation.</p>
+                </div>
+              </div>
+
+            </div>
+            <!-- /week-1-body -->
+          </article>
+          <!-- /week-1 -->
+
+          <!-- ======================================================
+               WEEK 2 — Solution Sets & Linear Independence
+          ====================================================== -->
+          <article id="week-2" class="week-module" data-week="2" aria-labelledby="week-2-title">
+            <header class="week-module__header">
+              <div class="week-module__badge" aria-hidden="true">02</div>
+              <div class="week-module__title-block">
+                <h3 id="week-2-title" class="week-module__title">Solution Sets &amp; Linear Independence</h3>
+                <p class="week-module__topics-summary">Homogeneous equations · Parametric vector form · Applications · Linear Independence</p>
+              </div>
+              <button class="week-module__toggle-btn" type="button" aria-expanded="false" aria-controls="week-2-body" aria-label="Expand Week 2 module">
+                <span class="week-toggle-icon" aria-hidden="true">▾</span>
+              </button>
+            </header>
+            <div class="week-module__body" id="week-2-body" hidden>
+              <div class="week-module__info" aria-labelledby="week-2-info-label">
+                <h4 id="week-2-info-label" class="week-module__section-title">Key Concepts</h4>
+                <div class="week-module__info-body">
+                  <ul class="concept-list">
+                    <li class="concept-list__item"><span class="concept-list__term">Homogeneous system Ax = 0</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Trivial vs non-trivial solutions</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Parametric vector form of solutions</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Linear Independence: vectors, columns of A</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Independence test via augmented matrix</span></li>
+                  </ul>
+                  <div class="week-module__textbook-ref">
+                    <span class="textbook-ref__book">Lay et al., 5th ed.</span>
+                    <span class="textbook-ref__sections">§1.5, §1.6, §1.7</span>
+                  </div>
+                </div>
+              </div>
+              <div class="week-module__generator" aria-labelledby="week-2-gen-label">
+                <h4 id="week-2-gen-label" class="week-module__section-title">Generate Week 2 Problem</h4>
+                <div class="week-generator-controls">
+                  <select class="week-generator__topic-select" id="w2-topic-select" name="w2-topic" aria-label="Week 2 topic">
+                    <option value="homogeneous">Homogeneous System</option>
+                    <option value="parametric-vector">Parametric Vector Form</option>
+                    <option value="lin-independence">Linear Independence Test</option>
+                    <option value="lin-combination">Express as Linear Combination</option>
+                  </select>
+                  <select class="week-generator__difficulty-select" id="w2-diff-select" name="w2-difficulty" aria-label="Difficulty for week 2">
+                    <option value="easy">Basic</option>
+                    <option value="intermediate" selected>Intermediate</option>
+                    <option value="hard">Advanced</option>
+                  </select>
+                  <button class="action-btn action-btn--week" type="button" id="gen-week2-btn" aria-label="Generate Week 2 problem">Generate</button>
+                </div>
+              </div>
+              <div class="week-module__exercises" id="week-2-exercises" aria-labelledby="week-2-exercises-label" aria-live="polite">
+                <h4 id="week-2-exercises-label" class="week-module__section-title">Generated Exercises</h4>
+                <div class="week-exercises-list" id="week-2-exercises-list">
+                  <p class="week-exercises-empty">No exercises generated yet for Week 2.</p>
+                </div>
+              </div>
+              <div class="week-module__solutions" id="week-2-solutions" aria-labelledby="week-2-solutions-label" aria-live="polite">
+                <h4 id="week-2-solutions-label" class="week-module__section-title">Solutions</h4>
+                <div class="week-solutions-list" id="week-2-solutions-list">
+                  <p class="week-solutions-empty">Solutions will appear after generation.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <!-- /week-2 -->
+
+          <!-- ======================================================
+               WEEK 3 — Linear Transformations & Matrix Operations
+          ====================================================== -->
+          <article id="week-3" class="week-module" data-week="3" aria-labelledby="week-3-title">
+            <header class="week-module__header">
+              <div class="week-module__badge" aria-hidden="true">03</div>
+              <div class="week-module__title-block">
+                <h3 id="week-3-title" class="week-module__title">Linear Transformations &amp; Matrix Operations</h3>
+                <p class="week-module__topics-summary">Linear Transformations · Matrix of T · Commutator · Transpose · f(A)</p>
+              </div>
+              <button class="week-module__toggle-btn" type="button" aria-expanded="false" aria-controls="week-3-body" aria-label="Expand Week 3 module">
+                <span class="week-toggle-icon" aria-hidden="true">▾</span>
+              </button>
+            </header>
+            <div class="week-module__body" id="week-3-body" hidden>
+              <div class="week-module__info" aria-labelledby="week-3-info-label">
+                <h4 id="week-3-info-label" class="week-module__section-title">Key Concepts</h4>
+                <div class="week-module__info-body">
+                  <ul class="concept-list">
+                    <li class="concept-list__item"><span class="concept-list__term">Linear transformation T: ℝⁿ → ℝᵐ</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Standard matrix of T</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Linearity test: T(u+v)=T(u)+T(v), T(cu)=cT(u)</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Matrix multiplication, commutator [A,B]=AB−BA</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Matrix polynomial f(A)</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Matrix representation on non-standard basis S</span></li>
+                  </ul>
+                  <div class="week-module__textbook-ref">
+                    <span class="textbook-ref__book">Lay et al., 5th ed.</span>
+                    <span class="textbook-ref__sections">§1.8, §1.9, §2.1, §2.2</span>
+                  </div>
+                </div>
+              </div>
+              <div class="week-module__generator" aria-labelledby="week-3-gen-label">
+                <h4 id="week-3-gen-label" class="week-module__section-title">Generate Week 3 Problem</h4>
+                <div class="week-generator-controls">
+                  <select class="week-generator__topic-select" id="w3-topic-select" name="w3-topic" aria-label="Week 3 topic">
+                    <option value="linearity-test">Linearity Test</option>
+                    <option value="std-matrix">Find Standard Matrix</option>
+                    <option value="commutator">Compute Commutator</option>
+                    <option value="matrix-poly">Matrix Polynomial f(A)</option>
+                    <option value="matrix-rep-basis">Matrix Repr. in Basis S</option>
+                  </select>
+                  <select class="week-generator__difficulty-select" id="w3-diff-select" name="w3-difficulty" aria-label="Difficulty for week 3">
+                    <option value="easy">Basic</option>
+                    <option value="intermediate" selected>Intermediate</option>
+                    <option value="hard">Advanced</option>
+                  </select>
+                  <button class="action-btn action-btn--week" type="button" id="gen-week3-btn" aria-label="Generate Week 3 problem">Generate</button>
+                </div>
+              </div>
+              <div class="week-module__exercises" id="week-3-exercises" aria-labelledby="week-3-exercises-label" aria-live="polite">
+                <h4 id="week-3-exercises-label" class="week-module__section-title">Generated Exercises</h4>
+                <div class="week-exercises-list" id="week-3-exercises-list">
+                  <p class="week-exercises-empty">No exercises generated yet for Week 3.</p>
+                </div>
+              </div>
+              <div class="week-module__solutions" id="week-3-solutions" aria-labelledby="week-3-solutions-label" aria-live="polite">
+                <h4 id="week-3-solutions-label" class="week-module__section-title">Solutions</h4>
+                <div class="week-solutions-list" id="week-3-solutions-list">
+                  <p class="week-solutions-empty">Solutions will appear after generation.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <!-- /week-3 -->
+
+          <!-- ======================================================
+               WEEK 4 — Inverse Matrices & LU Factorization
+          ====================================================== -->
+          <article id="week-4" class="week-module" data-week="4" aria-labelledby="week-4-title">
+            <header class="week-module__header">
+              <div class="week-module__badge" aria-hidden="true">04</div>
+              <div class="week-module__title-block">
+                <h3 id="week-4-title" class="week-module__title">Inverse Matrices &amp; LU Factorization</h3>
+                <p class="week-module__topics-summary">Inverse · Invertibility Conditions · IMT · LU Decomposition</p>
+              </div>
+              <button class="week-module__toggle-btn" type="button" aria-expanded="false" aria-controls="week-4-body" aria-label="Expand Week 4 module">
+                <span class="week-toggle-icon" aria-hidden="true">▾</span>
+              </button>
+            </header>
+            <div class="week-module__body" id="week-4-body" hidden>
+              <div class="week-module__info" aria-labelledby="week-4-info-label">
+                <h4 id="week-4-info-label" class="week-module__section-title">Key Concepts</h4>
+                <div class="week-module__info-body">
+                  <ul class="concept-list">
+                    <li class="concept-list__item"><span class="concept-list__term">Inverse via augmented matrix [A|I] → [I|A⁻¹]</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Invertible Matrix Theorem (IMT)</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">LU Factorization: A = LU</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Solving Ax = b via forward/back substitution</span></li>
+                  </ul>
+                  <div class="week-module__textbook-ref">
+                    <span class="textbook-ref__book">Lay et al., 5th ed.</span>
+                    <span class="textbook-ref__sections">§2.2, §2.3, §2.5</span>
+                  </div>
+                </div>
+              </div>
+              <div class="week-module__generator" aria-labelledby="week-4-gen-label">
+                <h4 id="week-4-gen-label" class="week-module__section-title">Generate Week 4 Problem</h4>
+                <div class="week-generator-controls">
+                  <select class="week-generator__topic-select" id="w4-topic-select" name="w4-topic" aria-label="Week 4 topic">
+                    <option value="find-inverse">Find A⁻¹</option>
+                    <option value="invertibility">Check Invertibility</option>
+                    <option value="lu-factorization">LU Factorization</option>
+                    <option value="solve-lu">Solve via LU</option>
+                  </select>
+                  <select class="week-generator__difficulty-select" id="w4-diff-select" name="w4-difficulty" aria-label="Difficulty for week 4">
+                    <option value="easy">Basic</option>
+                    <option value="intermediate" selected>Intermediate</option>
+                    <option value="hard">Advanced</option>
+                  </select>
+                  <button class="action-btn action-btn--week" type="button" id="gen-week4-btn" aria-label="Generate Week 4 problem">Generate</button>
+                </div>
+              </div>
+              <div class="week-module__exercises" id="week-4-exercises" aria-labelledby="week-4-exercises-label" aria-live="polite">
+                <h4 id="week-4-exercises-label" class="week-module__section-title">Generated Exercises</h4>
+                <div class="week-exercises-list" id="week-4-exercises-list">
+                  <p class="week-exercises-empty">No exercises generated yet for Week 4.</p>
+                </div>
+              </div>
+              <div class="week-module__solutions" id="week-4-solutions" aria-labelledby="week-4-solutions-label" aria-live="polite">
+                <h4 id="week-4-solutions-label" class="week-module__section-title">Solutions</h4>
+                <div class="week-solutions-list" id="week-4-solutions-list">
+                  <p class="week-solutions-empty">Solutions will appear after generation.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <!-- /week-4 -->
+
+          <!-- ======================================================
+               WEEK 5 — Determinants & Cramer's Rule
+          ====================================================== -->
+          <article id="week-5" class="week-module" data-week="5" aria-labelledby="week-5-title">
+            <header class="week-module__header">
+              <div class="week-module__badge" aria-hidden="true">05</div>
+              <div class="week-module__title-block">
+                <h3 id="week-5-title" class="week-module__title">Determinants &amp; Cramer's Rule</h3>
+                <p class="week-module__topics-summary">Determinant · Properties · Cramer's Rule · Area/Volume · Coplanarity</p>
+              </div>
+              <button class="week-module__toggle-btn" type="button" aria-expanded="false" aria-controls="week-5-body" aria-label="Expand Week 5 module">
+                <span class="week-toggle-icon" aria-hidden="true">▾</span>
+              </button>
+            </header>
+            <div class="week-module__body" id="week-5-body" hidden>
+              <div class="week-module__info" aria-labelledby="week-5-info-label">
+                <h4 id="week-5-info-label" class="week-module__section-title">Key Concepts</h4>
+                <div class="week-module__info-body">
+                  <ul class="concept-list">
+                    <li class="concept-list__item"><span class="concept-list__term">Cofactor expansion along any row/column</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Properties of determinants</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Cramer's Rule for n×n systems</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">det(A) ≠ 0 ↔ A invertible</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Coplanarity via det (= 0 condition)</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Area of parallelogram / Volume of parallelepiped</span></li>
+                  </ul>
+                  <div class="week-module__textbook-ref">
+                    <span class="textbook-ref__book">Lay et al., 5th ed.</span>
+                    <span class="textbook-ref__sections">§3.1, §3.2, §3.3</span>
+                  </div>
+                </div>
+              </div>
+              <div class="week-module__generator" aria-labelledby="week-5-gen-label">
+                <h4 id="week-5-gen-label" class="week-module__section-title">Generate Week 5 Problem</h4>
+                <div class="week-generator-controls">
+                  <select class="week-generator__topic-select" id="w5-topic-select" name="w5-topic" aria-label="Week 5 topic">
+                    <option value="det-compute">Compute Determinant</option>
+                    <option value="cramers">Cramer's Rule</option>
+                    <option value="coplanar">Coplanarity</option>
+                    <option value="area-vol">Area / Volume</option>
+                  </select>
+                  <select class="week-generator__difficulty-select" id="w5-diff-select" name="w5-difficulty" aria-label="Difficulty for week 5">
+                    <option value="easy">Basic</option>
+                    <option value="intermediate" selected>Intermediate</option>
+                    <option value="hard">Advanced</option>
+                  </select>
+                  <button class="action-btn action-btn--week" type="button" id="gen-week5-btn" aria-label="Generate Week 5 problem">Generate</button>
+                </div>
+              </div>
+              <div class="week-module__exercises" id="week-5-exercises" aria-labelledby="week-5-exercises-label" aria-live="polite">
+                <h4 id="week-5-exercises-label" class="week-module__section-title">Generated Exercises</h4>
+                <div class="week-exercises-list" id="week-5-exercises-list">
+                  <p class="week-exercises-empty">No exercises generated yet for Week 5.</p>
+                </div>
+              </div>
+              <div class="week-module__solutions" id="week-5-solutions" aria-labelledby="week-5-solutions-label" aria-live="polite">
+                <h4 id="week-5-solutions-label" class="week-module__section-title">Solutions</h4>
+                <div class="week-solutions-list" id="week-5-solutions-list">
+                  <p class="week-solutions-empty">Solutions will appear after generation.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <!-- /week-5 -->
+
+          <!-- ======================================================
+               WEEK 6 — Vector Spaces & Subspaces
+          ====================================================== -->
+          <article id="week-6" class="week-module" data-week="6" aria-labelledby="week-6-title">
+            <header class="week-module__header">
+              <div class="week-module__badge" aria-hidden="true">06</div>
+              <div class="week-module__title-block">
+                <h3 id="week-6-title" class="week-module__title">Vector Spaces &amp; Subspaces</h3>
+                <p class="week-module__topics-summary">Vector Spaces · Subspace Test · Null Space · Column Space · T/F problems</p>
+              </div>
+              <button class="week-module__toggle-btn" type="button" aria-expanded="false" aria-controls="week-6-body" aria-label="Expand Week 6 module">
+                <span class="week-toggle-icon" aria-hidden="true">▾</span>
+              </button>
+            </header>
+            <div class="week-module__body" id="week-6-body" hidden>
+              <div class="week-module__info" aria-labelledby="week-6-info-label">
+                <h4 id="week-6-info-label" class="week-module__section-title">Key Concepts</h4>
+                <div class="week-module__info-body">
+                  <ul class="concept-list">
+                    <li class="concept-list__item"><span class="concept-list__term">Subspace verification (closed under + and scalar mult.)</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Null space Nul(A) = {x | Ax = 0}</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Column space Col(A) = span of columns</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Union vs Intersection of subspaces (T/F)</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">ℝ⁴ subspace defined by linear constraints</span></li>
+                  </ul>
+                  <div class="week-module__textbook-ref">
+                    <span class="textbook-ref__book">Lay et al., 5th ed.</span>
+                    <span class="textbook-ref__sections">§4.1, §4.2</span>
+                  </div>
+                </div>
+              </div>
+              <div class="week-module__generator" aria-labelledby="week-6-gen-label">
+                <h4 id="week-6-gen-label" class="week-module__section-title">Generate Week 6 Problem</h4>
+                <div class="week-generator-controls">
+                  <select class="week-generator__topic-select" id="w6-topic-select" name="w6-topic" aria-label="Week 6 topic">
+                    <option value="subspace-test">Subspace Test (is U a subspace?)</option>
+                    <option value="null-space">Find Null Space &amp; Basis</option>
+                    <option value="col-space">Find Column Space &amp; Basis</option>
+                    <option value="tf-subspace">True/False: Subspace Properties</option>
+                  </select>
+                  <select class="week-generator__difficulty-select" id="w6-diff-select" name="w6-difficulty" aria-label="Difficulty for week 6">
+                    <option value="easy">Basic</option>
+                    <option value="intermediate" selected>Intermediate</option>
+                    <option value="hard">Advanced</option>
+                  </select>
+                  <button class="action-btn action-btn--week" type="button" id="gen-week6-btn" aria-label="Generate Week 6 problem">Generate</button>
+                </div>
+              </div>
+              <div class="week-module__exercises" id="week-6-exercises" aria-labelledby="week-6-exercises-label" aria-live="polite">
+                <h4 id="week-6-exercises-label" class="week-module__section-title">Generated Exercises</h4>
+                <div class="week-exercises-list" id="week-6-exercises-list">
+                  <p class="week-exercises-empty">No exercises generated yet for Week 6.</p>
+                </div>
+              </div>
+              <div class="week-module__solutions" id="week-6-solutions" aria-labelledby="week-6-solutions-label" aria-live="polite">
+                <h4 id="week-6-solutions-label" class="week-module__section-title">Solutions</h4>
+                <div class="week-solutions-list" id="week-6-solutions-list">
+                  <p class="week-solutions-empty">Solutions will appear after generation.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <!-- /week-6 -->
+
+          <!-- ======================================================
+               WEEK 7 — Bases, Dimension, Coordinate Systems, Rank
+          ====================================================== -->
+          <article id="week-7" class="week-module" data-week="7" aria-labelledby="week-7-title">
+            <header class="week-module__header">
+              <div class="week-module__badge" aria-hidden="true">07</div>
+              <div class="week-module__title-block">
+                <h3 id="week-7-title" class="week-module__title">Bases, Dimension &amp; Rank</h3>
+                <p class="week-module__topics-summary">Bases · Dimension · Coordinate Systems · Rank · Rank-Nullity Theorem</p>
+              </div>
+              <button class="week-module__toggle-btn" type="button" aria-expanded="false" aria-controls="week-7-body" aria-label="Expand Week 7 module">
+                <span class="week-toggle-icon" aria-hidden="true">▾</span>
+              </button>
+            </header>
+            <div class="week-module__body" id="week-7-body" hidden>
+              <div class="week-module__info" aria-labelledby="week-7-info-label">
+                <h4 id="week-7-info-label" class="week-module__section-title">Key Concepts</h4>
+                <div class="week-module__info-body">
+                  <ul class="concept-list">
+                    <li class="concept-list__item"><span class="concept-list__term">Basis: linearly independent spanning set</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Dimension = number of vectors in any basis</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Coordinate vector [v]_B</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Rank = dim(Col A); Nullity = dim(Nul A)</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Rank + Nullity = n (Rank-Nullity Theorem)</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">W ⊂ ℝ⁴ defined by constraints → basis and dimension</span></li>
+                  </ul>
+                  <div class="week-module__textbook-ref">
+                    <span class="textbook-ref__book">Lay et al., 5th ed.</span>
+                    <span class="textbook-ref__sections">§4.3, §4.4, §4.5, §4.6</span>
+                  </div>
+                </div>
+              </div>
+              <div class="week-module__generator" aria-labelledby="week-7-gen-label">
+                <h4 id="week-7-gen-label" class="week-module__section-title">Generate Week 7 Problem</h4>
+                <div class="week-generator-controls">
+                  <select class="week-generator__topic-select" id="w7-topic-select" name="w7-topic" aria-label="Week 7 topic">
+                    <option value="find-basis-w">Find Basis of W ⊂ ℝⁿ</option>
+                    <option value="dim">Dimension of Subspace</option>
+                    <option value="coord-vector">Coordinate Vector</option>
+                    <option value="rank">Compute Rank</option>
+                    <option value="rank-nullity">Apply Rank-Nullity</option>
+                  </select>
+                  <select class="week-generator__difficulty-select" id="w7-diff-select" name="w7-difficulty" aria-label="Difficulty for week 7">
+                    <option value="easy">Basic</option>
+                    <option value="intermediate" selected>Intermediate</option>
+                    <option value="hard">Advanced</option>
+                  </select>
+                  <button class="action-btn action-btn--week" type="button" id="gen-week7-btn" aria-label="Generate Week 7 problem">Generate</button>
+                </div>
+              </div>
+              <div class="week-module__exercises" id="week-7-exercises" aria-labelledby="week-7-exercises-label" aria-live="polite">
+                <h4 id="week-7-exercises-label" class="week-module__section-title">Generated Exercises</h4>
+                <div class="week-exercises-list" id="week-7-exercises-list">
+                  <p class="week-exercises-empty">No exercises generated yet for Week 7.</p>
+                </div>
+              </div>
+              <div class="week-module__solutions" id="week-7-solutions" aria-labelledby="week-7-solutions-label" aria-live="polite">
+                <h4 id="week-7-solutions-label" class="week-module__section-title">Solutions</h4>
+                <div class="week-solutions-list" id="week-7-solutions-list">
+                  <p class="week-solutions-empty">Solutions will appear after generation.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <!-- /week-7 -->
+
+          <!-- ======================================================
+               WEEK 8 — Change of Basis, Eigenvalues, Eigenvectors
+          ====================================================== -->
+          <article id="week-8" class="week-module" data-week="8" aria-labelledby="week-8-title">
+            <header class="week-module__header">
+              <div class="week-module__badge" aria-hidden="true">08</div>
+              <div class="week-module__title-block">
+                <h3 id="week-8-title" class="week-module__title">Change of Basis &amp; Eigenvalues</h3>
+                <p class="week-module__topics-summary">Change-of-Basis Matrix · Eigenvalues · Eigenvectors · Characteristic Equation</p>
+              </div>
+              <button class="week-module__toggle-btn" type="button" aria-expanded="false" aria-controls="week-8-body" aria-label="Expand Week 8 module">
+                <span class="week-toggle-icon" aria-hidden="true">▾</span>
+              </button>
+            </header>
+            <div class="week-module__body" id="week-8-body" hidden>
+              <div class="week-module__info" aria-labelledby="week-8-info-label">
+                <h4 id="week-8-info-label" class="week-module__section-title">Key Concepts</h4>
+                <div class="week-module__info-body">
+                  <ul class="concept-list">
+                    <li class="concept-list__item"><span class="concept-list__term">Change-of-basis matrix P from S to S'</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Characteristic polynomial det(A−λI) = 0</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Eigenvalues λ, eigenvectors v: Av = λv</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Eigenspace = Nul(A−λI)</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Algebraic vs geometric multiplicity</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">I₁, I₂, I₃ invariants for 3×3 char. polynomial</span></li>
+                  </ul>
+                  <div class="week-module__textbook-ref">
+                    <span class="textbook-ref__book">Lay et al., 5th ed.</span>
+                    <span class="textbook-ref__sections">§4.7, §5.1, §5.2</span>
+                  </div>
+                </div>
+              </div>
+              <div class="week-module__generator" aria-labelledby="week-8-gen-label">
+                <h4 id="week-8-gen-label" class="week-module__section-title">Generate Week 8 Problem</h4>
+                <div class="week-generator-controls">
+                  <select class="week-generator__topic-select" id="w8-topic-select" name="w8-topic" aria-label="Week 8 topic">
+                    <option value="change-basis">Change-of-Basis Matrix P</option>
+                    <option value="char-poly">Characteristic Polynomial</option>
+                    <option value="eigenvalues">Find Eigenvalues</option>
+                    <option value="eigenvectors">Find Eigenvectors</option>
+                    <option value="eigenspace-basis">Eigenspace Basis</option>
+                  </select>
+                  <select class="week-generator__difficulty-select" id="w8-diff-select" name="w8-difficulty" aria-label="Difficulty for week 8">
+                    <option value="easy">Basic</option>
+                    <option value="intermediate" selected>Intermediate</option>
+                    <option value="hard">Advanced</option>
+                  </select>
+                  <button class="action-btn action-btn--week" type="button" id="gen-week8-btn" aria-label="Generate Week 8 problem">Generate</button>
+                </div>
+              </div>
+              <div class="week-module__exercises" id="week-8-exercises" aria-labelledby="week-8-exercises-label" aria-live="polite">
+                <h4 id="week-8-exercises-label" class="week-module__section-title">Generated Exercises</h4>
+                <div class="week-exercises-list" id="week-8-exercises-list">
+                  <p class="week-exercises-empty">No exercises generated yet for Week 8.</p>
+                </div>
+              </div>
+              <div class="week-module__solutions" id="week-8-solutions" aria-labelledby="week-8-solutions-label" aria-live="polite">
+                <h4 id="week-8-solutions-label" class="week-module__section-title">Solutions</h4>
+                <div class="week-solutions-list" id="week-8-solutions-list">
+                  <p class="week-solutions-empty">Solutions will appear after generation.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <!-- /week-8 -->
+
+          <!-- ======================================================
+               WEEK 9 — Diagonalization, Complex Eigenvalues, Gram-Schmidt
+          ====================================================== -->
+          <article id="week-9" class="week-module" data-week="9" aria-labelledby="week-9-title">
+            <header class="week-module__header">
+              <div class="week-module__badge" aria-hidden="true">09</div>
+              <div class="week-module__title-block">
+                <h3 id="week-9-title" class="week-module__title">Diagonalization, Complex Eigenvalues &amp; Gram–Schmidt</h3>
+                <p class="week-module__topics-summary">Diagonalization A=PDP⁻¹ · Complex Eigenvalues · Gram–Schmidt · Orthogonal Complement</p>
+              </div>
+              <button class="week-module__toggle-btn" type="button" aria-expanded="false" aria-controls="week-9-body" aria-label="Expand Week 9 module">
+                <span class="week-toggle-icon" aria-hidden="true">▾</span>
+              </button>
+            </header>
+            <div class="week-module__body" id="week-9-body" hidden>
+              <div class="week-module__info" aria-labelledby="week-9-info-label">
+                <h4 id="week-9-info-label" class="week-module__section-title">Key Concepts</h4>
+                <div class="week-module__info-body">
+                  <ul class="concept-list">
+                    <li class="concept-list__item"><span class="concept-list__term">A diagonalizable ↔ basis of eigenvectors exists</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">A = PDP⁻¹ → Aⁿ = PDⁿP⁻¹</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">f(A) = Pf(D)P⁻¹ (matrix polynomial)</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Complex eigenvalues for 2×2 matrices</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Gram–Schmidt orthogonalization</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Orthonormal basis; QR factorization</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Orthogonal complement M⊥</span></li>
+                    <li class="concept-list__item"><span class="concept-list__term">Jordan canonical form (generalized eigenvectors)</span></li>
+                  </ul>
+                  <div class="week-module__textbook-ref">
+                    <span class="textbook-ref__book">Lay et al., 5th ed.</span>
+                    <span class="textbook-ref__sections">§5.3, §5.5, §6.1, §6.2, §6.4</span>
+                  </div>
+                </div>
+              </div>
+              <div class="week-module__generator" aria-labelledby="week-9-gen-label">
+                <h4 id="week-9-gen-label" class="week-module__section-title">Generate Week 9 Problem</h4>
+                <div class="week-generator-controls">
+                  <select class="week-generator__topic-select" id="w9-topic-select" name="w9-topic" aria-label="Week 9 topic">
+                    <option value="diagonalize">Diagonalize A (find P, D)</option>
+                    <option value="matrix-power">Compute Aⁿ via Diagonalization</option>
+                    <option value="matrix-func">f(A) = B⁴ − 2B² + 3I via Diag.</option>
+                    <option value="is-diag">Is A Diagonalizable? Justify.</option>
+                    <option value="complex-eval">Complex Eigenvalues (2×2)</option>
+                    <option value="gram-schmidt">Gram–Schmidt Process</option>
+                    <option value="orthonormal">Find Orthonormal Basis</option>
+                    <option value="orth-complement">Orthogonal Complement M⊥</option>
+                  </select>
+                  <select class="week-generator__difficulty-select" id="w9-diff-select" name="w9-difficulty" aria-label="Difficulty for week 9">
+                    <option value="easy">Basic</option>
+                    <option value="intermediate" selected>Intermediate</option>
+                    <option value="hard">Advanced</option>
+                  </select>
+                  <button class="action-btn action-btn--week" type="button" id="gen-week9-btn" aria-label="Generate Week 9 problem">Generate</button>
+                </div>
+              </div>
+              <div class="week-module__exercises" id="week-9-exercises" aria-labelledby="week-9-exercises-label" aria-live="polite">
+                <h4 id="week-9-exercises-label" class="week-module__section-title">Generated Exercises</h4>
+                <div class="week-exercises-list" id="week-9-exercises-list">
+                  <p class="week-exercises-empty">No exercises generated yet for Week 9.</p>
+                </div>
+              </div>
+              <div class="week-module__solutions" id="week-9-solutions" aria-labelledby="week-9-solutions-label" aria-live="polite">
+                <h4 id="week-9-solutions-label" class="week-module__section-title">Solutions</h4>
+                <div class="week-solutions-list" id="week-9-solutions-list">
+                  <p class="week-solutions-empty">Solutions will appear after generation.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <!-- /week-9 -->
+
+          <!-- ======================================================
+               WEEK 10 — Comprehensive Final Review
+          ====================================================== -->
+          <article id="week-10" class="week-module week-module--final" data-week="10" aria-labelledby="week-10-title">
+            <header class="week-module__header">
+              <div class="week-module__badge week-module__badge--final" aria-hidden="true">10</div>
+              <div class="week-module__title-block">
+                <h3 id="week-10-title" class="week-module__title">Comprehensive Final Review</h3>
+                <p class="week-module__topics-summary">Full course recap · AITU Final Exam patterns · Variant-0 style problems</p>
+              </div>
+              <button class="week-module__toggle-btn" type="button" aria-expanded="false" aria-controls="week-10-body" aria-label="Expand Week 10 module">
+                <span class="week-toggle-icon" aria-hidden="true">▾</span>
+              </button>
+            </header>
+            <div class="week-module__body" id="week-10-body" hidden>
+              <div class="week-module__info" aria-labelledby="week-10-info-label">
+                <h4 id="week-10-info-label" class="week-module__section-title">Final Exam Topic Checklist</h4>
+                <div class="week-module__info-body">
+                  <ul class="concept-list concept-list--checklist" id="final-checklist">
+                    <li class="concept-list__item concept-list__item--check"><span class="concept-list__term">Gaussian Elimination &amp; RREF</span></li>
+                    <li class="concept-list__item concept-list__item--check"><span class="concept-list__term">Matrix Operations, Commutator, Inverse</span></li>
+                    <li class="concept-list__item concept-list__item--check"><span class="concept-list__term">Determinants &amp; Cramer's Rule</span></li>
+                    <li class="concept-list__item concept-list__item--check"><span class="concept-list__term">Subspaces (Null Space, Col Space, basis, dimension)</span></li>
+                    <li class="concept-list__item concept-list__item--check"><span class="concept-list__term">Linear Transformations &amp; their Matrix Representations</span></li>
+                    <li class="concept-list__item concept-list__item--check"><span class="concept-list__term">Change of Basis</span></li>
+                    <li class="concept-list__item concept-list__item--check"><span class="concept-list__term">Eigenvalues, Eigenvectors, Characteristic Polynomial</span></li>
+                    <li class="concept-list__item concept-list__item--check"><span class="concept-list__term">Diagonalization A = PDP⁻¹</span></li>
+                    <li class="concept-list__item concept-list__item--check"><span class="concept-list__term">Gram–Schmidt Orthogonalization</span></li>
+                    <li class="concept-list__item concept-list__item--check"><span class="concept-list__term">Orthogonal Complement</span></li>
+                  </ul>
+                  <div class="week-module__textbook-ref">
+                    <span class="textbook-ref__book">Lay et al., 5th ed. — Full course</span>
+                    <span class="textbook-ref__sections">§1–6</span>
+                  </div>
+                </div>
+              </div>
+              <div class="week-module__generator" aria-labelledby="week-10-gen-label">
+                <h4 id="week-10-gen-label" class="week-module__section-title">Generate Final Review Problem</h4>
+                <div class="week-generator-controls">
+                  <select class="week-generator__topic-select" id="w10-topic-select" name="w10-topic" aria-label="Week 10 topic">
+                    <option value="mixed-all">Mixed — All Topics</option>
+                    <option value="exam-variant-style">AITU Exam Variant Style</option>
+                    <option value="proof-type">Proof / Justification Type</option>
+                    <option value="geometric-interp">Geometric Interpretation</option>
+                  </select>
+                  <select class="week-generator__difficulty-select" id="w10-diff-select" name="w10-difficulty" aria-label="Difficulty for week 10">
+                    <option value="intermediate">Intermediate</option>
+                    <option value="hard" selected>Advanced (Exam-level)</option>
+                  </select>
+                  <button class="action-btn action-btn--week action-btn--final" type="button" id="gen-week10-btn" aria-label="Generate Week 10 final review problem">
+                    Generate
+                  </button>
+                </div>
+              </div>
+              <div class="week-module__exercises" id="week-10-exercises" aria-labelledby="week-10-exercises-label" aria-live="polite">
+                <h4 id="week-10-exercises-label" class="week-module__section-title">Generated Exercises</h4>
+                <div class="week-exercises-list" id="week-10-exercises-list">
+                  <p class="week-exercises-empty">No exercises generated yet for Week 10.</p>
+                </div>
+              </div>
+              <div class="week-module__solutions" id="week-10-solutions" aria-labelledby="week-10-solutions-label" aria-live="polite">
+                <h4 id="week-10-solutions-label" class="week-module__section-title">Solutions</h4>
+                <div class="week-solutions-list" id="week-10-solutions-list">
+                  <p class="week-solutions-empty">Solutions will appear after generation.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <!-- /week-10 -->
+
+        </section>
+        <!-- /topic-modules -->
+
+        <!-- ============================================================
+             LATEX / MATHJAX NOTATION PALETTE
+             (Hidden containers for future MathJax integration)
+        ============================================================ -->
+        <section
+          id="latex-palette"
+          class="latex-palette section"
+          aria-labelledby="latex-palette-title"
+          aria-label="LaTeX notation reference and template palette"
+        >
+          <header class="section__header">
+            <h2 id="latex-palette-title" class="section__title">LaTeX / MathJax Notation Reference</h2>
+            <p class="section__subtitle">Structural containers for mathematical typesetting — populated by MathJax at runtime</p>
+          </header>
+
+          <div class="latex-palette__grid">
+
+            <!-- Matrix Notation Templates -->
+            <div class="latex-template-group" id="latex-matrices" aria-labelledby="latex-matrices-label">
+              <h3 id="latex-matrices-label" class="latex-template-group__title">Matrices</h3>
+              <div class="latex-template" data-latex-type="matrix-2x2" aria-label="2x2 matrix template">
+                <span class="latex-template__label">2×2 Matrix</span>
+                <div class="latex-template__display math-content" data-mathjax-placeholder="matrix-2x2">
+                  <!-- MathJax renders: \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix} -->
+                </div>
+              </div>
+              <div class="latex-template" data-latex-type="matrix-3x3" aria-label="3x3 matrix template">
+                <span class="latex-template__label">3×3 Matrix</span>
+                <div class="latex-template__display math-content" data-mathjax-placeholder="matrix-3x3">
+                  <!-- MathJax renders: \begin{pmatrix} a & b & c \\ d & e & f \\ g & h & i \end{pmatrix} -->
+                </div>
+              </div>
+              <div class="latex-template" data-latex-type="augmented-matrix" aria-label="Augmented matrix template">
+                <span class="latex-template__label">Augmented Matrix [A|b]</span>
+                <div class="latex-template__display math-content" data-mathjax-placeholder="augmented-matrix">
+                  <!-- MathJax: \left[\begin{array}{ccc|c} ... \end{array}\right] -->
+                </div>
+              </div>
+            </div>
+            <!-- /latex-matrices -->
+
+            <!-- Vector Notation Templates -->
+            <div class="latex-template-group" id="latex-vectors" aria-labelledby="latex-vectors-label">
+              <h3 id="latex-vectors-label" class="latex-template-group__title">Vectors</h3>
+              <div class="latex-template" data-latex-type="column-vector" aria-label="Column vector template">
+                <span class="latex-template__label">Column Vector</span>
+                <div class="latex-template__display math-content" data-mathjax-placeholder="column-vector">
+                  <!-- MathJax: \mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \\ v_3 \end{pmatrix} -->
+                </div>
+              </div>
+              <div class="latex-template" data-latex-type="span-set" aria-label="Span notation template">
+                <span class="latex-template__label">Span Notation</span>
+                <div class="latex-template__display math-content" data-mathjax-placeholder="span-set">
+                  <!-- MathJax: \text{span}\left\{\mathbf{v}_1, \mathbf{v}_2\right\} -->
+                </div>
+              </div>
+            </div>
+            <!-- /latex-vectors -->
+
+            <!-- Equation Templates -->
+            <div class="latex-template-group" id="latex-equations" aria-labelledby="latex-equations-label">
+              <h3 id="latex-equations-label" class="latex-template-group__title">Equations &amp; Systems</h3>
+              <div class="latex-template" data-latex-type="linear-system" aria-label="Linear system template">
+                <span class="latex-template__label">3×3 Linear System</span>
+                <div class="latex-template__display math-content" data-mathjax-placeholder="linear-system">
+                  <!-- MathJax: \begin{cases} a_{11}x_1 + a_{12}x_2 + a_{13}x_3 = b_1 \\ ... \end{cases} -->
+                </div>
+              </div>
+              <div class="latex-template" data-latex-type="matrix-equation" aria-label="Matrix equation template">
+                <span class="latex-template__label">Matrix Equation Ax = b</span>
+                <div class="latex-template__display math-content" data-mathjax-placeholder="matrix-equation">
+                  <!-- MathJax: A\mathbf{x} = \mathbf{b} -->
+                </div>
+              </div>
+            </div>
+            <!-- /latex-equations -->
+
+            <!-- Determinant Templates -->
+            <div class="latex-template-group" id="latex-determinants" aria-labelledby="latex-determinants-label">
+              <h3 id="latex-determinants-label" class="latex-template-group__title">Determinants</h3>
+              <div class="latex-template" data-latex-type="det-2x2" aria-label="2x2 determinant template">
+                <span class="latex-template__label">2×2 Determinant</span>
+                <div class="latex-template__display math-content" data-mathjax-placeholder="det-2x2">
+                  <!-- MathJax: \det(A) = \begin{vmatrix} a & b \\ c & d \end{vmatrix} = ad - bc -->
+                </div>
+              </div>
+              <div class="latex-template" data-latex-type="det-3x3" aria-label="3x3 determinant template">
+                <span class="latex-template__label">3×3 Determinant (Cofactor)</span>
+                <div class="latex-template__display math-content" data-mathjax-placeholder="det-3x3">
+                  <!-- MathJax: \begin{vmatrix} ... \end{vmatrix} with cofactor expansion -->
+                </div>
+              </div>
+            </div>
+            <!-- /latex-determinants -->
+
+            <!-- Eigenvalue Notation Templates -->
+            <div class="latex-template-group" id="latex-eigenvalues" aria-labelledby="latex-eigenvalues-label">
+              <h3 id="latex-eigenvalues-label" class="latex-template-group__title">Eigenvalue Notation</h3>
+              <div class="latex-template" data-latex-type="characteristic-eq" aria-label="Characteristic equation template">
+                <span class="latex-template__label">Characteristic Equation</span>
+                <div class="latex-template__display math-content" data-mathjax-placeholder="characteristic-eq">
+                  <!-- MathJax: \det(A - \lambda I) = 0 -->
+                </div>
+              </div>
+              <div class="latex-template" data-latex-type="eigenvector-eq" aria-label="Eigenvector equation template">
+                <span class="latex-template__label">Eigenvector Equation</span>
+                <div class="latex-template__display math-content" data-mathjax-placeholder="eigenvector-eq">
+                  <!-- MathJax: A\mathbf{v} = \lambda\mathbf{v} -->
+                </div>
+              </div>
+              <div class="latex-template" data-latex-type="diagonalization" aria-label="Diagonalization formula template">
+                <span class="latex-template__label">Diagonalization</span>
+                <div class="latex-template__display math-content" data-mathjax-placeholder="diagonalization">
+                  <!-- MathJax: A = PDP^{-1}, \quad D = \begin{pmatrix} \lambda_1 & & \\ & \lambda_2 & \\ & & \lambda_3 \end{pmatrix} -->
+                </div>
+              </div>
+              <div class="latex-template" data-latex-type="gram-schmidt-formula" aria-label="Gram-Schmidt formula template">
+                <span class="latex-template__label">Gram–Schmidt</span>
+                <div class="latex-template__display math-content" data-mathjax-placeholder="gram-schmidt-formula">
+                  <!-- MathJax: \mathbf{u}_k = \mathbf{v}_k - \sum_{j<k} \frac{\mathbf{v}_k \cdot \mathbf{u}_j}{\mathbf{u}_j \cdot \mathbf{u}_j}\mathbf{u}_j -->
+                </div>
+              </div>
+            </div>
+            <!-- /latex-eigenvalues -->
+
+          </div>
+          <!-- /latex-palette__grid -->
+
+        </section>
+        <!-- /latex-palette -->
+
+      </main>
+      <!-- /main -->
+
+      <!-- ============================================================
+           SITE FOOTER
+      ============================================================ -->
+      <footer id="site-footer" class="site-footer" role="contentinfo">
+        <div class="site-footer__body">
+          <div class="site-footer__left">
+            <p class="site-footer__institution">
+              <strong>Astana IT University</strong> · School of AI &amp; Data Science
+            </p>
+            <p class="site-footer__course">
+              Linear Algebra · Spring 2026 · Instructor: Zamart Ramazanova
+            </p>
+            <p class="site-footer__textbook">
+              Based on: Lay, Lay &amp; McDonald, <em>Linear Algebra and Its Applications</em>, 5th ed.
+            </p>
+          </div>
+          <div class="site-footer__right">
+            <nav class="site-footer__nav" aria-label="Footer navigation">
+              <a href="#dashboard" class="site-footer__nav-link">Dashboard</a>
+              <a href="#generator-panel" class="site-footer__nav-link">Generator</a>
+              <a href="#exam-mode" class="site-footer__nav-link">Exam Mode</a>
+              <a href="#topic-modules" class="site-footer__nav-link">Modules</a>
+            </nav>
+            <p class="site-footer__version">
+              <span id="footer-version">v1.0</span> · Problem Generator · 2026
+            </p>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <p class="site-footer__disclaimer">
+            Generated problems are for practice only. Always verify answers with course materials.
+          </p>
+        </div>
+      </footer>
+      <!-- /site-footer -->
+
+    </div>
+    <!-- /content-area -->
+
+  </div>
+  <!-- /site-wrapper -->
+
+  <!-- ============================================================
+       TOAST / NOTIFICATION REGION (Accessibility: aria-live)
+  ============================================================ -->
+  <div
+    id="toast-region"
+    class="toast-region"
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+    aria-label="Notifications"
+  >
+    <!-- Toast notifications injected here by JS -->
+  </div>
+
+  <!-- ============================================================
+       MODAL — Bookmark / Problem details
+  ============================================================ -->
+  <div
+    id="problem-modal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    aria-describedby="modal-body"
+    hidden
+  >
+    <div class="modal__backdrop" id="modal-backdrop"></div>
+    <div class="modal__panel">
+      <header class="modal__header">
+        <h2 id="modal-title" class="modal__title">Problem Details</h2>
+        <button id="modal-close-btn" class="modal__close-btn" type="button" aria-label="Close dialog">×</button>
+      </header>
+      <div class="modal__body" id="modal-body">
+        <!-- Dynamic content injected by JS -->
+      </div>
+      <footer class="modal__footer">
+        <button class="action-btn action-btn--ghost" id="modal-cancel-btn" type="button">Close</button>
+        <button class="action-btn action-btn--primary" id="modal-confirm-btn" type="button">Bookmark</button>
+      </footer>
+    </div>
+  </div>
+  <!-- /problem-modal -->
+
+  <!-- ============================================================
+       BACK TO TOP BUTTON
+  ============================================================ -->
+  <button
+    id="back-to-top-btn"
+    class="back-to-top-btn"
+    type="button"
+    aria-label="Back to top"
+    hidden
+  >
+    <span aria-hidden="true">↑</span>
+  </button>
+
+  <!-- ============================================================
+       MAIN JAVASCRIPT (to be created separately)
+  ============================================================ -->
+  <script src="script.js" defer></script>
+
+</body>
+</html>
