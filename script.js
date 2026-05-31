@@ -2773,20 +2773,63 @@ function initUtilityButtons() {
       const margin = 12;
       const contentW = pageW - margin * 2;
 
-      // Temporarily force a white background so canvas renders correctly
-      const originalBg = examPaper.style.background;
-      examPaper.style.background = '#ffffff';
+      // Wait for any pending MathJax typesetting to fully complete
+      if (window.MathJax?.typesetPromise) {
+     await window.MathJax.typesetPromise([examPaper]).catch(() => {});
+     // Additional settle time for SVG layout reflow
+     await new Promise(resolve => setTimeout(resolve, 400));
+      }
 
-      const canvas = await html2canvas(examPaper, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        backgroundColor: '#ffffff',
-        windowWidth: examPaper.scrollWidth,
-        windowHeight: examPaper.scrollHeight
-      });
+   // Temporarily force a white background so canvas renders correctly
+   // Snapshot current theme state
+const body = document.getElementById('page-body');
+const wasLight = body.hasAttribute('data-theme');
 
-      examPaper.style.background = originalBg;
+// Force light theme on body for capture so all CSS vars resolve to light values
+if (!wasLight) {
+  body.setAttribute('data-theme', 'light');
+  body.classList.remove('theme-dark');
+  body.classList.add('theme-light');
+}
+
+const originalBg = examPaper.style.background;
+const originalColor = examPaper.style.color;
+examPaper.style.background = '#ffffff';
+examPaper.style.color = '#0f172a';
+
+// Brief reflow so CSS var() re-resolves under the light theme
+await new Promise(resolve => setTimeout(resolve, 80));
+
+const canvas = await html2canvas(examPaper, {
+  scale: 2,
+  useCORS: true,
+  logging: false,
+  backgroundColor: '#ffffff',
+  width: examPaper.offsetWidth,
+  height: examPaper.scrollHeight,
+  windowWidth: window.innerWidth,
+  windowHeight: examPaper.scrollHeight,
+  scrollX: 0,
+  scrollY: -window.scrollY
+  onclone: (doc) => {
+    // Ensure the cloned document also has light theme applied
+    const cloneBody = doc.getElementById('page-body');
+    if (cloneBody) {
+      cloneBody.setAttribute('data-theme', 'light');
+      cloneBody.classList.remove('theme-dark');
+      cloneBody.classList.add('theme-light');
+    }
+  }
+});
+
+// Restore original theme
+examPaper.style.background = originalBg;
+examPaper.style.color = originalColor;
+if (!wasLight) {
+  body.removeAttribute('data-theme');
+  body.classList.remove('theme-light');
+  body.classList.add('theme-dark');
+}
 
       const imgData = canvas.toDataURL('image/jpeg', 0.92);
       const imgW = contentW;
