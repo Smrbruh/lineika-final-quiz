@@ -1730,7 +1730,7 @@ const Generators = (() => {
         answer: `Orthogonal basis: $\\{${orthVecs.map((v,i)=>`\\mathbf{u}_{${i+1}}`).join(', ')}\\}$.`,
         steps: [
           { title: 'u₁ = v₁', math: `\\[\\mathbf{u}_1 = ${vecToLatex(vecs[0])}\\]` },
-          { title: 'u₂ = v₂ − proj_{u₁}(v₂)', math: `\\[\\mathbf{u}_2 = \\mathbf{v}_2 - \\frac{\\mathbf{v}_2 \\cdot \\mathbf{u}_1}{\\mathbf{u}_1 \\cdot \\mathbf{u}_1}\\mathbf{u}_1\\]` },
+          { title: 'u₃ = v₃ − proj_{u₁}(v₃) − proj_{u₂}(v₃)', math: `\\[\\mathbf{u}_3 = \\mathbf{v}_3 - \\frac{\\mathbf{v}_3 \\cdot \\mathbf{u}_1}{\\|\\mathbf{u}_1\\|^2}\\mathbf{u}_1 - \\frac{\\mathbf{v}_3 \\cdot \\mathbf{u}_2}{\\|\\mathbf{u}_2\\|^2}\\mathbf{u}_2\\]` },
           ...(n === 3 ? [{ title: 'u₃ = v₃ − proj_{u₁}(v₃) − proj_{u₂}(v₃)', math: `\\[\\mathbf{u}_3 = \\mathbf{v}_3 - \\frac{\\mathbf{v}_3 \\cdot \\mathbf{u}_1}{\\|\\mathbf{u}_1\\|^2}\\mathbf{u}_1 - \\frac{\\mathbf{v}_3 \\cdot \\mathbf{u}_2}{\\|\\mathbf{u}_2\\|^2}\\mathbf{u}_2\\]` }] : []),
           { title: 'Normalize', math: `\\[\\mathbf{e}_k = \\frac{\\mathbf{u}_k}{\\|\\mathbf{u}_k\\|}\\]` }
         ]
@@ -2152,7 +2152,11 @@ const ProblemDisplay = (() => {
 
     // Render MathJax for solution
     const solutionSection = document.getElementById('solution-area');
-    MathRenderer.render(solutionSection);
+   if (window.MathJax?.typesetPromise) {
+        window.MathJax.typesetPromise([solutionSection]).catch(err => console.warn('[MathJax]', err));
+   } else {
+        MathRenderer.render(solutionSection);
+   }
   }
 
   function startTimer() {
@@ -2608,7 +2612,7 @@ function initLatexPalette() {
     'characteristic-eq': '\\det(A - \\lambda I) = 0',
     'eigenvector-eq': 'A\\mathbf{v} = \\lambda\\mathbf{v}',
     'diagonalization': 'A = PDP^{-1}, \\quad D = \\begin{pmatrix} \\lambda_1 & 0 \\\\ 0 & \\lambda_2 \\end{pmatrix}',
-    'gram-schmidt-formula': '\\mathbf{u}_k = \\mathbf{v}_k - \\sum_{j<k} \\frac{\\mathbf{v}_k \\cdot \\mathbf{u}_j}{\\|\\mathbf{u}_j\\|^2}\\mathbf{u}_j'
+    'gram-schmidt-formula': '\\mathbf{u}_k = \\mathbf{v}_k - \\displaystyle\\sum_{j \\lt k} \\frac{\\mathbf{v}_k \\cdot \\mathbf{u}_j}{\\mathbf{u}_j \\cdot \\mathbf{u}_j}\\mathbf{u}_j'
   };
 
   document.querySelectorAll('[data-mathjax-placeholder]').forEach(el => {
@@ -2732,6 +2736,104 @@ function initUtilityButtons() {
     }
     ProblemDisplay.showSolution();
     StatsManager.incrementViewed();
+  });
+
+  // Exam timer pause
+  // Download exam as PDF
+  document.getElementById('download-exam-pdf-btn')?.addEventListener('click', async () => {
+    const btn = document.getElementById('download-exam-pdf-btn');
+    const examPaper = document.getElementById('exam-paper');
+
+    if (!examPaper) {
+      ToastManager.show('No exam to download.', 'warning');
+      return;
+    }
+
+    const problemsList = document.getElementById('exam-problems-list');
+    if (!problemsList || problemsList.hasAttribute('hidden') || problemsList.children.length === 0) {
+      ToastManager.show('Generate an exam first.', 'warning');
+      return;
+    }
+
+    if (typeof html2canvas === 'undefined' || typeof window.jspdf === 'undefined') {
+      ToastManager.show('PDF library not loaded. Check your connection.', 'error');
+      return;
+    }
+
+    btn.setAttribute('disabled', '');
+    btn.querySelector('.action-btn__text').textContent = 'Generating…';
+    ToastManager.show('Preparing PDF…', 'info', 3000);
+
+    try {
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+      const pageW = pdf.internal.pageSize.getWidth();
+      const pageH = pdf.internal.pageSize.getHeight();
+      const margin = 12;
+      const contentW = pageW - margin * 2;
+
+      // Temporarily force a white background so canvas renders correctly
+      const originalBg = examPaper.style.background;
+      examPaper.style.background = '#ffffff';
+
+      const canvas = await html2canvas(examPaper, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff',
+        windowWidth: examPaper.scrollWidth,
+        windowHeight: examPaper.scrollHeight
+      });
+
+      examPaper.style.background = originalBg;
+
+      const imgData = canvas.toDataURL('image/jpeg', 0.92);
+      const imgW = contentW;
+      const imgH = (canvas.height * imgW) / canvas.width;
+
+      let yOffset = margin;
+      let remainingH = imgH;
+      let sourceY = 0;
+      const usableH = pageH - margin * 2;
+
+      while (remainingH > 0) {
+        const sliceH = Math.min(remainingH, usableH);
+        const sliceCanvas = document.createElement('canvas');
+        sliceCanvas.width = canvas.width;
+        sliceCanvas.height = (sliceH / imgH) * canvas.height;
+
+        const ctx = sliceCanvas.getContext('2d');
+        ctx.drawImage(
+          canvas,
+          0, sourceY,
+          canvas.width, sliceCanvas.height,
+          0, 0,
+          canvas.width, sliceCanvas.height
+        );
+
+        const sliceData = sliceCanvas.toDataURL('image/jpeg', 0.92);
+        pdf.addImage(sliceData, 'JPEG', margin, yOffset, imgW, sliceH);
+
+        sourceY += sliceCanvas.height;
+        remainingH -= sliceH;
+
+        if (remainingH > 0) {
+          pdf.addPage();
+          yOffset = margin;
+        }
+      }
+
+      const timestamp = new Date().toISOString().slice(0, 10);
+      pdf.save(`AITU_Linear_Algebra_Exam_${timestamp}.pdf`);
+      ToastManager.show('PDF downloaded!', 'success', 3000);
+    } catch (err) {
+      console.error('[PDF Export]', err);
+      ToastManager.show('PDF generation failed. See console for details.', 'error');
+    } finally {
+      btn.removeAttribute('disabled');
+      btn.querySelector('.action-btn__text').textContent = 'Download as PDF';
+    }
   });
 
   // Exam timer pause
