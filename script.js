@@ -2473,7 +2473,11 @@ const SidebarController = (() => {
     navLinks.forEach(link => {
       const href = link.getAttribute('href');
       link.classList.toggle('sidebar__nav-link--active', href === `#${activeId}`);
-      link.toggleAttribute('aria-current', href === `#${activeId}`);
+      if (href === `#${activeId}`) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
     });
   }
 
@@ -2907,22 +2911,18 @@ function initApp() {
     document.getElementById('reveal-solution-btn')?.addEventListener('click', () => ProblemDisplay.toggleSolution());
 
     // MathJax initial render for static elements
-    if (window.MathJax) {
-      window.MathJax.startup?.promise?.then(() => {
-        initLatexPalette();
-        MathRenderer.renderAll();
-      }).catch(() => {});
-    } else {
-      // If MathJax isn't loaded, set up a watcher
-      let mjWatchAttempts = 0;
-      const mjWatch = setInterval(() => {
-        mjWatchAttempts++;
-        if (window.MathJax || mjWatchAttempts > 30) {
-          clearInterval(mjWatch);
-          if (window.MathJax) { initLatexPalette(); MathRenderer.renderAll(); }
-        }
-      }, 500);
-    }
+   document.addEventListener('mathjax-ready', () => {
+     initLatexPalette();
+     MathRenderer.renderAll();
+   });
+
+// Fallback: if MathJax loads before the event system initialises
+   if (window.MathJax?.startup?.promise) {
+     window.MathJax.startup.promise.then(() => {
+       initLatexPalette();
+       MathRenderer.renderAll();
+     }).catch(() => {});
+   }
 
     // Keyboard shortcut hint toast
     setTimeout(() => {
