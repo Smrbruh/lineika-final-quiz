@@ -186,7 +186,7 @@
   --text-primary:   #0F172A;
   --text-secondary: #334155;
   --text-muted:     #64748B;
-  --text-faint:     #CBD5E1;
+  --text-faint:     #94A3B8;
 
   --border:         rgba(0,0,0,0.08);
   --border-strong:  rgba(0,0,0,0.13);
@@ -199,8 +199,12 @@
   --shadow-primary: 0 8px 32px rgba(29,78,216,0.2);
   --shadow-card:    0 2px 16px rgba(0,0,0,0.08);
 
-  --sidebar-bg:     #1E2B40;
-  --header-bg:      rgba(248,250,252,0.95);
+  --sidebar-bg:          #1E2B40;
+  --sidebar-text:        #CBD5E1;
+  --sidebar-text-muted:  #94A3B8;
+  --sidebar-item-hover:  rgba(255,255,255,0.07);
+  --sidebar-item-active: rgba(255,255,255,0.12);
+  --header-bg:           rgba(248,250,252,0.95);
 
   --math-bg:        rgba(241,245,249,0.9);
   --math-border:    rgba(29,78,216,0.2);
@@ -500,9 +504,9 @@ fieldset { border: none; }
   transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
 }
 .sidebar__week-link:hover .sidebar__week-badge {
-  background: var(--primary-dim);
-  border-color: var(--border-accent);
-  color: var(--primary-hover);
+  background: rgba(37, 99, 235, 0.25);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: #93C5FD;
 }
 .sidebar__week-badge--final {
   background: var(--accent-dim);
@@ -551,6 +555,47 @@ fieldset { border: none; }
   font-size: 0.65rem;
   color: var(--text-faint);
   margin-top: 2px;
+}
+[data-theme="light"] .sidebar__nav-link,
+.theme-light .sidebar__nav-link {
+  color: var(--sidebar-text, #CBD5E1);
+}
+
+[data-theme="light"] .sidebar__nav-link:hover,
+.theme-light .sidebar__nav-link:hover {
+  color: #F8FAFC;
+  background: var(--sidebar-item-hover);
+}
+
+[data-theme="light"] .sidebar__nav-link--active,
+.theme-light .sidebar__nav-link--active {
+  color: #93C5FD;
+  background: var(--sidebar-item-active);
+}
+
+[data-theme="light"] .sidebar__nav-group-title,
+.theme-light .sidebar__nav-group-title {
+  color: var(--sidebar-text-muted, #94A3B8);
+}
+
+[data-theme="light"] .sidebar__week-title,
+.theme-light .sidebar__week-title {
+  color: var(--sidebar-text, #CBD5E1);
+}
+
+[data-theme="light"] .sidebar__week-topics,
+.theme-light .sidebar__week-topics {
+  color: var(--sidebar-text-muted, #94A3B8);
+}
+
+[data-theme="light"] .sidebar__footer-text,
+.theme-light .sidebar__footer-text {
+  color: var(--sidebar-text-muted, #94A3B8);
+}
+
+[data-theme="light"] .sidebar__footer-sub,
+.theme-light .sidebar__footer-sub {
+  color: #64748B;
 }
 
 /* Sidebar overlay for mobile */
