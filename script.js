@@ -778,6 +778,9 @@ const Generators = (() => {
   }
 
   function genVectorEquations(difficulty) {
+     const A = transpose(vecs);  // m×n coefficient matrix (rows = equations)
+     const augMatrix = transpose(vecs).map((row, i) => [...row, target[i]]);
+     const augRREF = rowReduce(augMatrix);
     const d = difficulty || 'intermediate';
     const n = d === 'easy' ? 2 : 3;
     const range = d === 'hard' ? 6 : 4;
@@ -804,7 +807,7 @@ const Generators = (() => {
         answer: `Yes, $\\mathbf{b} = ${coeffStr}$.`,
         steps: [
           { title: 'Set Up Augmented Matrix', explanation: 'Form [v₁ v₂ … vₙ | b] and row reduce.', math: `\\[${augToLatex(transpose(vecs), target)}\\]` },
-          { title: 'Row Reduce', explanation: 'Apply RREF to find the coefficients.', math: `\\[${augToLatex(rowReduce(transpose(vecs).map((row,i)=>[...row,target[i]])).rref.map(r=>r.slice(0,-1)), rowReduce(transpose(vecs).map((row,i)=>[...row,target[i]])).rref.map(r=>r[r.length-1]))}\\]` },
+          { title: 'Row Reduce', explanation: 'Apply RREF to find the coefficients.', math: `\\[${augToLatex(augRREF.rref.map(r=>r.slice(0,-1)), augRREF.rref.map(r=>r[r.length-1]))}\\]` },
           { title: 'Read Off Coefficients', math: `\\[\\mathbf{b} = ${coeffStr}\\]` }
         ]
       },
@@ -1068,7 +1071,7 @@ const Generators = (() => {
         steps: [
           { title: 'Set Up [A|I]', math: `\\[${augToLatex(A, identity(n).map((row,i)=>row))}\\]` },
           { title: 'Row Reduce to [I|A⁻¹]', explanation: 'Apply the same row operations to both sides.', math: Ainv ? `\\[A^{-1} = ${matToLatex(Ainv.map(r => r.map(v => Math.round(v*100)/100)))}\\]` : '\\[\\text{Singular matrix — no inverse}\\]' },
-          { title: 'Solve Ax=b', math: x ? `\\[\\mathbf{x} = A^{-1}\\mathbf{b} = ${vecToLatex(x.map(v=>Math.round(v*100)/100))}\\]` : '\\[\\text{No unique solution}\\]` },
+          { title: 'Solve Ax=b', math: x ? `\\[\\mathbf{x} = A^{-1}\\mathbf{b} = ${vecToLatex(x.map(v=>Math.round(v*100)/100))}\\]` : '\\[\\text{No unique solution}\\]' },
           { title: 'Verify', math: `\\[AA^{-1} = I_${n} \\checkmark\\]` }
         ]
       },
@@ -2006,8 +2009,8 @@ const ProblemDisplay = (() => {
     // Show content, hide empty state
     const content = document.getElementById('problem-content');
     const emptyState = document.getElementById('problem-empty-state');
-    if (emptyState) emptyState.setAttribute('aria-hidden', 'true');
-    if (content) content.setAttribute('aria-hidden', 'false');
+    if (emptyState) { emptyState.setAttribute('aria-hidden', 'true'); emptyState.style.display = 'none'; }
+     if (content) { content.setAttribute('aria-hidden', 'false'); content.style.display = ''; }
 
     // Set instructions
     const instrEl = document.getElementById('problem-instructions-text');
@@ -2520,7 +2523,7 @@ function updateInfoCard(topicKey) {
 
   const nameEl = document.getElementById('info-card-topic-name');
   const weekEl = document.getElementById('info-card-week-label');
-  const descEl = document.getElementById('info-card-description');
+  const descEl = document.getElementById('info-card-deion');
   const conceptsEl = document.getElementById('info-card-key-concepts');
   const sectionEl = document.getElementById('info-card-section');
 
@@ -2794,6 +2797,8 @@ function initSpecialTypeButtons() {
    ============================================================ */
 
 function initMainGenerator() {
+   const examMode = document.querySelector('input[name="exam-mode"]:checked')?.value || 'practice';
+StorageManager.set('examMode', examMode);
   const generateBtn = document.getElementById('generate-btn');
   if (!generateBtn) return;
 
